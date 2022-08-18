@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="bgimg" style="background-image: url({% static 'default.jpg' %})">
+    <div class="topleft">
+        <img src="{% static 'branding/clipart2037661.png' %}" style="width: 150px">
+    </div>
+
+    <div class="middle">
+        <h1>About</h1>
+        <hr>
+    </div>
+</div>
+{% endblock %}
