@@ -12,7 +12,7 @@ class Media(models.Model):
     image = models.ImageField(upload_to="media")
     url = models.URLField()
     order = models.IntegerField(default=0)
-    visable =
+    visable = models.BooleanField(default=True)
 
     def __str__(self):
         return self.image.url

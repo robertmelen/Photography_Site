@@ -34,11 +34,12 @@ class ContactView(TemplateView):
         return context
 
 
-class MediaView(ListView):
+class IndexView(ListView):
 
-    template_name = "main/media.html"
+    template_name = "main/index.html"
     model = Media
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context ['main_images'] = Media.objects.filter(visable=True)
         return context
