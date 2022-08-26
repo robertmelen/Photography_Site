@@ -11,4 +11,9 @@ class Media(models.Model):
     timestamp = models.DateTimeField()
     image = models.ImageField(upload_to="media")
     url = models.URLField()
+    order = models.IntegerField(default=0)
+    visable =
+
+    def __str__(self):
+        return self.image.url
 
