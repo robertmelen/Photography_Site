@@ -13,7 +13,8 @@
       <div id="js-grid-inline" class="cbp cbp-l-grid-inline">
 
  {% for image in main_images %}
-        <div class="cbp-item web-design print"> <a href="ajax/post5.html" class="cbp-caption cbp-singlePageInline">
+
+        <div class="cbp-item web-design print"> <a href="{% url 'main:select' image.categories.slug %}" class="cbp-caption cbp-singlePageInline">
 
 
 
@@ -24,7 +25,7 @@
           <div class="cbp-caption-activeWrap">
             <div class="cbp-l-caption-alignCenter">
               <div class="cbp-l-caption-body">
-                <div class="cbp-l-caption-title">{{image.timestamp}}</div>
+                <div class="cbp-l-caption-title">{{image.image.url}}</div>
 
 
               </div>
@@ -36,8 +37,6 @@
 
           </a> </div>
           {% endfor %}
-
-
       </div>
 
 {% endblock %}
