@@ -42,6 +42,8 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context ['main_images'] = Media.objects.filter(visable=True)
+        context ['image_categories'] = Category.objects.filter(visable=True)
+        #context['image_categories'] =
         return context
 
 
@@ -66,4 +68,9 @@ class SelectView(ListView):
         #return Media.objects.filter(categories__title=self.publisher)
 
 
+
+class MenuSelectView(ListView):
+
+    template_name = "main/menu_select.html"
+    model = Category
 
