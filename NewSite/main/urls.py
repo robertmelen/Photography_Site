@@ -9,5 +9,6 @@ urlpatterns = [
     path("about", views.AboutView.as_view(), name="about"),
     path("contact", views.ContactView.as_view(), name="contact"),
     path("select/<slug:slug>", views.SelectView.as_view(), name="select"),
-    path("menu_select", views.MenuSelectView.as_view(), name="menu_select"),
+    path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
+
 ]

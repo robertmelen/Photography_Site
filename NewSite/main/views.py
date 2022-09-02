@@ -53,6 +53,7 @@ class SelectView(ListView):
     model = Media
 
     def get_queryset(self):
+
         # Also, the self keyword is not needed here either -> self.category
         category = get_object_or_404(Category, slug=self.kwargs['slug'])  # updated
         return Media.objects.filter(categories__title=category)  # updated
@@ -68,9 +69,23 @@ class SelectView(ListView):
         #return Media.objects.filter(categories__title=self.publisher)
 
 
+class GallerySelectView(ListView):
 
-class MenuSelectView(ListView):
+    template_name = "main/gallery_select.html"
+    model = Media
 
-    template_name = "main/menu_select.html"
-    model = Category
+    def get_queryset(self):
+        # Also, the self keyword is not needed here either -> self.category
+        category = get_object_or_404(Category, slug=self.kwargs['slug'])  # updated
+        return Media.objects.filter(categories__title=category)  # updated
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+        return context
+
+
+    #def get_queryset(self):
+        #self.publisher = get_object_or_404(Media, name=self.kwargs['pk'])
+        #return Media.objects.filter(categories__title=self.publisher)
 

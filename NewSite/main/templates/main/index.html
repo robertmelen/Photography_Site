@@ -7,13 +7,16 @@
 
 
 <div class="cbp-filter-container text-center">
+
     <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"><span>All</span></div>
-{% for img in image_categories %}
-    <div data-filter=".food-drink" class="cbp-filter-item"><span>{{ img }}</span></div>{% endfor %}
 
+{% for a in image_categories %}
+
+    <div data-filter=".food-drink" class="cbp-filter-item">{% for img in main_images %}<a href="{% url 'main:gallery_select' img.categories.slug %}">{% ifchanged a %}<span>{{ a }}</span>{% endifchanged %}</a>{% endfor %}</div>
+{% endfor %}
 </div>
-{% endblock %}
 
+{% endblock %}
 
 
 {% block content %}
@@ -21,7 +24,7 @@
     <div class="divide25"></div>
         <div id="js-grid-inline" class="cbp cbp-l-grid-inline">
             {% for image in main_images %}
-            <div class="cbp-item web-design print"> {% if image.categories.slug %} <a href="{% url 'main:select' image.categories.slug %}"  class="cbp-caption cbp-singlePageInline">{% endif %}
+            <div class="cbp-item web-design print"> {% if image.categories.slug %} <a href="{% url 'main:select' image.categories.slug %}"class="cbp-caption cbp-singlePageInline">{% endif %}
                 <div class="cbp-caption-defaultWrap"> <img src="{{ MEDIA_URL }} {{ image.image.url }}"alt=""> </div>
                     <div class="cbp-caption-activeWrap">
                         <div class="cbp-l-caption-alignCenter">
@@ -32,6 +35,8 @@
                     </div>
             </a>
             </div>
+
+
           {% endfor %}
       </div>
 {% endblock %}
