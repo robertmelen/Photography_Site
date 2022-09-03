@@ -26,6 +26,8 @@ class Albums(models.Model):
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ForeignKey('Media', on_delete=models.CASCADE)
 
+    album_images = models.ManyToManyField('Media', related_name="album_pictures")
+
     def __str__(self):
         return str(self.name)
 

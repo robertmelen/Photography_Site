@@ -42,7 +42,7 @@
           <!--/column -->
           {% for a in object_list %}
           <div class="item col-xs-6 col-sm-6 col-md-4">
-            <figure class="overlay"> <a href="#myModal4" data-toggle="modal" data-target="#myModal4">
+            <figure class="overlay"> <a href="" data-toggle="modal" data-target="#myModal4">
               <div class="text-overlay caption">
                 <div class="info">
                   <h2 class="post-title">{{ a.name }}</h2>
@@ -123,7 +123,7 @@
             <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.</p>
             <div class="divide10"></div>
             <ul class="basic-gallery text-center">
-              <li><img src="style/images/art/pm1-full1.jpg" alt="" /></li>
+
               <li><img src="style/images/art/pm1-full2.jpg" alt="" /></li>
               <li><img src="style/images/art/pm1-full3.jpg" alt="" /></li>
               <li><img src="style/images/art/pm1-full4.jpg" alt="" /></li>
@@ -175,10 +175,15 @@
       <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal4" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <h2 class="post-title text-center">Riding My Bike</h2>
-            <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <h2 class="post-title text-center">Riding My Bikeghjghjghj</h2><h1>dasdasdsad</h1>
+            <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur hgjghjgj.</p>
             <ul class="basic-gallery text-center">
-              <li><img src="style/images/art/pm4-full1.jpg" alt="" /></li>
+
+              <h1>dasdasdsad</h1>
+              <h1>dasdasdsad</h1>
+              {% for image in objects_list.album_pictures.all  %}
+              {{ b.timestamp }}
+              <li><img src="{{ MEDIA_URL }} {{ b.image.url }}" alt="" /></li>{% endfor %}
               <li><img src="style/images/art/pm4-full2.jpg" alt="" /></li>
               <li><img src="style/images/art/pm4-full3.jpg" alt="" /></li>
               <li><img src="style/images/art/pm4-full4.jpg" alt="" /></li>
@@ -189,6 +194,7 @@
           </div>
         </div>
       </div>
+
       <!--/.modal -->
 
       <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal5" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
