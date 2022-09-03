@@ -10,5 +10,6 @@ urlpatterns = [
     path("contact", views.ContactView.as_view(), name="contact"),
     path("select/<slug:slug>", views.SelectView.as_view(), name="select"),
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
+    path("gallery", views.GalleryView.as_view(), name="gallery"),
 
 ]

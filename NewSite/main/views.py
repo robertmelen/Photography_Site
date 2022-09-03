@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
-from . models import Media, Category
+from . models import Media, Category, Albums
 
 
 # Create your views here.
@@ -82,6 +82,7 @@ class GallerySelectView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+        context['main_images'] = Media.objects.filter(visable=True)
         return context
 
 
@@ -89,3 +90,10 @@ class GallerySelectView(ListView):
         #self.publisher = get_object_or_404(Media, name=self.kwargs['pk'])
         #return Media.objects.filter(categories__title=self.publisher)
 
+
+
+
+class GalleryView(ListView):
+
+    template_name = "main/gallery.html"
+    model = Albums

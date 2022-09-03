@@ -18,14 +18,26 @@ class Category(models.Model):
         return str(self.title)
 
 
+class Albums(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    slug = AutoSlugField(populate_from='title')
+    created = models.DateTimeField()
+    visable = models.BooleanField(default=False)
+    type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ForeignKey('Media', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.name)
+
 class Media(models.Model):
 
     timestamp = models.DateTimeField()
     image = models.ImageField(upload_to="media")
-    url = models.URLField()
+
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    gallery = models.ManyToManyField(Albums)
 
     class Meta:
         verbose_name_plural = "Media"
