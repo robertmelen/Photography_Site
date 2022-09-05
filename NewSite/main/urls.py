@@ -11,5 +11,7 @@ urlpatterns = [
     path("select/<slug:slug>", views.SelectView.as_view(), name="select"),
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
     path("gallery", views.GalleryView.as_view(), name="gallery"),
+    path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
+
 
 ]

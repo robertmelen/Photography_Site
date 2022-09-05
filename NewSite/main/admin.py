@@ -7,6 +7,7 @@ admin.site.register(Albums)
 
 
 
+
 #@admin.register(Media)
 #class MediaAdmin(admin.ModelAdmin):
     #list_display  = ('image', 'categories', 'order',)

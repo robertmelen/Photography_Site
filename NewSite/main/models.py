@@ -20,12 +20,11 @@ class Category(models.Model):
 
 class Albums(models.Model):
     name = models.CharField(max_length=200, null=True)
-    slug = AutoSlugField(populate_from='title')
+    slug = AutoSlugField(populate_from='name')
     created = models.DateTimeField()
     visable = models.BooleanField(default=False)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ForeignKey('Media', on_delete=models.CASCADE)
-
     album_images = models.ManyToManyField('Media', related_name="album_pictures")
 
     def __str__(self):
@@ -35,11 +34,10 @@ class Media(models.Model):
 
     timestamp = models.DateTimeField()
     image = models.ImageField(upload_to="media")
-
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    gallery = models.ManyToManyField(Albums)
+
 
     class Meta:
         verbose_name_plural = "Media"

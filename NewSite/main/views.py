@@ -99,9 +99,28 @@ class GalleryView(ListView):
     model = Albums
 
 
-#def get_context_data(self, **kwargs):
-    # Call the base implementation first to get a context
-    #context = super().get_context_data(**kwargs)
-    # Add in a QuerySet of all the books
+    #def get_queryset(self, *args, **kwargs):
+        #return get_object_or_404(Albums.album_pictures.filter(self.kwargs['slug']))
 
-    #context['galley_pics'] = Albums.album_images.all()
+
+#class GalleryDetail(ListView):
+
+    #template_name = "main/gallery_detail.html"
+    #model = Media
+
+    #def get_queryset(self):
+        # Also, the self keyword is not needed here either -> self.category
+        #gallery = get_object_or_404(Media, gallery=self.kwargs['gallery'])  # updated
+
+        #return Media.objects.filter(gallery=gallery)  # updated
+
+
+class GalleryDetailView(ListView):
+
+    template_name = "main/gallery-detail.html"
+    model = Media
+
+    def get_queryset(self):
+
+        gallery = get_object_or_404(Albums, slug=self.kwargs['slug'])
+        return Media.objects.filter(album_pictures=gallery)
