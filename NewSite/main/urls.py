@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+
 from . import views
 
 
@@ -12,6 +13,7 @@ urlpatterns = [
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
     path("gallery", views.GalleryView.as_view(), name="gallery"),
     path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
+
 
 
 ]

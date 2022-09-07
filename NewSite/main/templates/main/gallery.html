@@ -3,11 +3,7 @@
 {% block gallery %}
 {% for gallery in object_list %}
     <div class="item col-xs-6 col-sm-6 col-md-4">
-            <figure class="overlay"> <a hx-get="{% url 'main:gallery_detail' gallery.slug %}"
-                                        hx-target="#myModal"
-
-
-
+            <figure class="overlay"> <a href="{% url 'main:gallery_detail' gallery.slug %}"
                                         data-toggle="modal" data-target="#myModal1">
               <div class="text-overlay caption">
                 <div class="info">
@@ -18,5 +14,5 @@
               <img src="{{ gallery.image.image.url }}" alt="" /></a> </figure>
           </div>
 {% endfor %}
-<div id="#myModal"> {% include "main/gallery-detail.html" %} </div>
+{% include "main/gallery-detail.html" %}
 {% endblock %}

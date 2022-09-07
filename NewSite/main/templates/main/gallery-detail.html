@@ -1,20 +1,17 @@
 {% load static %}
-
-
 <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog">
     <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
-
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <p class="text-center"> sit amet non magna. Maecenas.</p>
-{% for img in object_list %}
-             <ul class="basic-gallery text-center">
-                 <li>{{ img.order }}<img src="{{ img.image.image.url }}" alt="" />{% endfor %}</li>
+            {% for img in object_list %}
+            <ul class="basic-gallery text-center">
+                 <li>{{ img.order }}<img src="{{ img.image.url }}" alt="" /></li>
             </ul>
-
         </div>
     </div>
-</div>
+
+</div>{% endfor %}
 
 
 
