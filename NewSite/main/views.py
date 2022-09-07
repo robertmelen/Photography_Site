@@ -123,4 +123,11 @@ class GalleryDetailView(ListView):
     def get_queryset(self):
 
         gallery = get_object_or_404(Albums, slug=self.kwargs['slug'])
+        print(gallery)
         return Media.objects.filter(album_pictures=gallery)
+
+    #def get_context_data(self, **kwargs):
+        #context = super().get_context_data(**kwargs)
+
+        #context['all_album_images'] = Media.objects.filter(gallery=self.gallery)
+        #return context

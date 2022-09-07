@@ -1,47 +1,22 @@
 {% extends "main/base.html" %}
 {% load static %}
-
 {% block gallery %}
+{% for gallery in object_list %}
+    <div class="item col-xs-6 col-sm-6 col-md-4">
+            <figure class="overlay"> <a hx-get="{% url 'main:gallery_detail' gallery.slug %}"
+                                        hx-target="#myModal"
 
 
-          <!--/column -->
-          {% for first_image in object_list %}
-          <div class="item col-xs-6 col-sm-6 col-md-4">
-            <figure class="overlay"> <a href="{% url 'main:gallery_detail' first_image.slug %}" data-toggle="modal" data-target="#myModal1">
+
+                                        data-toggle="modal" data-target="#myModal1">
               <div class="text-overlay caption">
                 <div class="info">
-                  <h2 class="post-title">{{ first_image.name }}</h2>
+                  <h2 class="post-title">{{ gallery.name }}</h2>
                   <div class="meta"> <span class="count">7 Photos</span> <span class="category">Hobby</span></div>
                 </div>
               </div>
-              <img src="{{ first_image.image.image.url }}" alt="" /></a> </figure>
+              <img src="{{ gallery.image.image.url }}" alt="" /></a> </figure>
           </div>
-          {% endfor %}
-
-
-
-
-      <!--/.modal -->
-      <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <h2 class="post-title text-center">Riding My Bikeghjghjghj</h2><h1>dasdasdsad</h1>
-            <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur hgjghjgj.</p>
-            <ul class="basic-gallery text-center">
-
-              <h1>dasdasdsad</h1>
-              <h1>dasdasdsad</h1>
-
-              <li><img src="" alt="" /></li>
-              <li><img src="style/images/art/pm4-full2.jpg" alt="" /></li>
-              <li><img src="style/images/art/pm4-full3.jpg" alt="" /></li>
-              <li><img src="style/images/art/pm4-full4.jpg" alt="" /></li>
-              <li><img src="style/images/art/pm4-full5.jpg" alt="" /></li>
-              <li><img src="style/images/art/pm4-full6.jpg" alt="" /></li>
-              <li><img src="style/images/art/pm4-full7.jpg" alt="" /></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+{% endfor %}
+<div id="#myModal"> {% include "main/gallery-detail.html" %} </div>
 {% endblock %}
