@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from . models import Media, Category, Albums
 
@@ -99,35 +100,53 @@ class GalleryView(ListView):
     model = Albums
 
 
-    #def get_queryset(self, *args, **kwargs):
-        #return get_object_or_404(Albums.album_pictures.filter(self.kwargs['slug']))
 
 
-#class GalleryDetail(ListView):
 
-    #template_name = "main/gallery_detail.html"
-    #model = Media
-
-    #def get_queryset(self):
-        # Also, the self keyword is not needed here either -> self.category
-        #gallery = get_object_or_404(Media, gallery=self.kwargs['gallery'])  # updated
-
-        #return Media.objects.filter(gallery=gallery)  # updated
-
-
-class GalleryDetailView(ListView):
+class GalleryDetailView(DetailView):
 
     template_name = "main/gallery-detail.html"
-    model = Media
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwargs):
+        pictures = get_object_or_404(Albums, slug=kwargs['slug'])
+        pictures_all = Media.objects.filter(album_pictures=pictures)
+        print(pictures_all)
+        context = {'gallery_pics': pictures_all}
+        return render(request, 'main/gallery-detail.html', context)
 
-        gallery = get_object_or_404(Albums, slug=self.kwargs['slug'])
-        print(gallery)
-        return Media.objects.filter(album_pictures=gallery)
+
+
+
+
+
+
+
+    #WORKING QUERYSEWTR FILTER
+    #def get_queryset(self):
+
+        #gallery = get_object_or_404(Albums, slug=self.kwargs['slug'])
+        #print(gallery)
+        #return Media.objects.filter(album_pictures=gallery)
+
+
+
+
+
+
 
     #def get_context_data(self, **kwargs):
-        #context = super().get_context_data(**kwargs)
-
-        #context['all_album_images'] = Media.objects.filter(gallery=self.gallery)
+        #context = super(GalleryDetailView, self).get_context_data(**kwargs)
+        #context['object_list'] =
+        #print(context['object_list'])
+            #Media.objects.filter(gallery=self.gallery)
         #return context
+
+
+
+#FUNCTION BASED TEST DIDNT WORK
+#def gallery_list(request, slug):
+    #image_list = get_object_or_404(Albums, slug=slug)
+    #images = Media.objects.filter(album_pictures=image_list)
+
+    #return render(request, 'main/gallery-detail.html',
+                  #{'images': images})

@@ -1,17 +1,23 @@
+{% extends "main/base.html" %}
 {% load static %}
-<div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog">
-    <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <p class="text-center"> sit amet non magna. Maecenas.</p>
-            {% for img in object_list %}
-            <ul class="basic-gallery text-center">
-                 <li>{{ img.order }}<img src="{{ img.image.url }}" alt="" /></li>
-            </ul>
-        </div>
+{% block hero %}
+<div class="light-wrapper">
+    <div class="container-fluid inner tp60 bp0">
+      <div class="hero text-center">
+        <p>{{ img.timestamp }}</p>
+      </div>
+        {% endblock %}
+
+
+{% block content %}
+{% for img in gallery_pics %}
+<div class="row">
+    <div class="col-4 mx-auto text-center">
+        <img src="{{ img.image.url }}" alt="" style="width: 900px;"/><div>sfdafdsaf</div>
+        <hr>
     </div>
 
-</div>{% endfor %}
-
+{% endfor %}
+{% endblock %}
 
 

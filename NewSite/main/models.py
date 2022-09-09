@@ -1,6 +1,7 @@
 from django.db import models
 from PIL import Image
 from slugger import AutoSlugField
+from django.urls import reverse
 
 # Create your models here.
 
@@ -30,6 +31,9 @@ class Albums(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def get_absolute_url(self):
+        return reverse('main:gallery_detail', args=[self.slug],)
+
 class Media(models.Model):
 
     timestamp = models.DateTimeField()
@@ -48,4 +52,6 @@ class Media(models.Model):
 
     def __str__(self):
         return self.image.url
+
+
 
