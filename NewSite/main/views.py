@@ -93,26 +93,34 @@ class GallerySelectView(ListView):
 
 
 
-
-class GalleryView(ListView):
-
-    template_name = "main/gallery.html"
-    model = Albums
+#
+# def GalleryDetailView(request):
+#     pass
 
 
 
 
 
-class GalleryDetailView(DetailView):
+def GalleryView(request):
 
-    template_name = "main/gallery-detail.html"
+    if request.htmx:
+        slug = request.GET.get('slug')
+        pics = get_object_or_404(Albums, slug=slug)
+        context = {'pictures': Media.objects.filter(album_pictures=pics)}
+        return render(request, 'main/gallery-detail.html', context=context)
 
-    def get(self, request, *args, **kwargs):
-        pictures = get_object_or_404(Albums, slug=kwargs['slug'])
-        pictures_all = Media.objects.filter(album_pictures=pictures)
-        print(pictures_all)
-        context = {'gallery_pics': pictures_all}
-        return render(request, 'main/gallery-detail.html', context)
+    context = {'objects_list': Albums.objects.all()}
+    return render(request, 'main/gallery.html', context=context)
+# class GalleryDetailView(DetailView):
+#
+#     template_name = "main/gallery-detail.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         pictures = get_object_or_404(Albums, slug=kwargs['slug'])
+#         pictures_all = Media.objects.filter(album_pictures=pictures)
+#         print(pictures_all)
+#         context = {'gallery_pics': pictures_all}
+#         return render(request, 'main/gallery-detail.html', context)
 
 
 

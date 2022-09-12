@@ -1,23 +1,32 @@
-{% extends "main/base.html" %}
+
 {% load static %}
-{% block hero %}
-<div class="light-wrapper">
-    <div class="container-fluid inner tp60 bp0">
-      <div class="hero text-center">
-        <p>{{ img.timestamp }}</p>
+</body>
+<div class="modal-body">
+      <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            {% for img in pictures %}
+            <h2 class="post-title text-center">{{ img.title }}</h2>
+            <a href="{% url 'main:gallery' %}">Back to Gallery page</a>
+            <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <div class="divide10"></div>
+            <ul class="basic-gallery text-center">
+              <li><img src="{{ img.image.url }}" alt="" /></li>
+
+            </ul>
+          </div>
+
+        </div>
       </div>
-        {% endblock %}
-
-
-{% block content %}
-{% for img in gallery_pics %}
-<div class="row">
-    <div class="col-4 mx-auto text-center">
-        <img src="{{ img.image.url }}" alt="" style="width: 900px;"/><div>sfdafdsaf</div>
-        <hr>
-    </div>
+  <script>
+    var myModalEl = document.getElementById('myModal');
+    var modal = bootstrap.Modal.getInstance(myModalEl);
+    modal.toggle();
+</script>
+  <script type="text/javascript" src="{% static  'style/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/plugins.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/scripts.js' %}"></script>
+</div>
 
 {% endfor %}
-{% endblock %}
-
-
