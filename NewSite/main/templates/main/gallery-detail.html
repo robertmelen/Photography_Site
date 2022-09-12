@@ -1,33 +1,32 @@
-
 {% load static %}
 {% block hero %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
+</head>
+<div class="container">
+  <div class="gallery-title">
 <a href="{% url 'main:gallery' %}">Back to Gallery page</a>
+      {% for i in description %}
+  <p>{{i.name }}.</p></div>{% endfor %}
+</div>
 {% endblock %}
 </body>
-<div class="modal-body">
-      <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
+  <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <h2 class="post-title text-center">{{ img.title }}</h2>
-            <a href="{% url 'main:gallery' %}">Back to Gallery page</a>
+
             <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.</p>
             <div class="divide10"></div>
             {% for img in pictures %}
+
             <ul class="basic-gallery text-center">
-              <li><img src="{{ img.image.url }}" alt="" /></li>
+
+              <li><img src="{{ img.image.url }}" class="gallery-images-detail" alt="" /></li>
             </ul>
           </div>
-
         </div>
       </div>
-  <script>
-    var myModalEl = document.getElementById('myModal');
-    var modal = bootstrap.Modal.getInstance(myModalEl);
-    modal.toggle();
-</script>
-  <script type="text/javascript" src="{% static  'style/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static  'style/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static  'style/js/plugins.js' %}"></script>
-<script type="text/javascript" src="{% static  'style/js/scripts.js' %}"></script>
-</div>
 {% endfor %}
+<h1>Placeholder for further galleries</h1>
+

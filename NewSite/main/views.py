@@ -106,7 +106,8 @@ def GalleryView(request):
     if request.htmx:
         slug = request.GET.get('slug')
         pics = get_object_or_404(Albums, slug=slug)
-        context = {'pictures': Media.objects.filter(album_pictures=pics)}
+
+        context = {'pictures': Media.objects.filter(album_pictures=pics), 'description': Albums.objects.filter(slug=slug)}
         return render(request, 'main/gallery-detail.html', context=context)
 
     context = {'objects_list': Albums.objects.all()}
