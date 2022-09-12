@@ -21,6 +21,8 @@ class Category(models.Model):
 
 class Albums(models.Model):
     name = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True, blank=True,
+                                   help_text="Gallery description on gallery page")
     slug = AutoSlugField(populate_from='name')
     created = models.DateTimeField()
     visable = models.BooleanField(default=False)
