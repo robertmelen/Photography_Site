@@ -34,3 +34,7 @@ hr {
     margin: auto;
     width: 40%;
 }
+
+.hero-custom {
+    h1: 200px;
+}
