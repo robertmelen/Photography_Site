@@ -1,31 +1,28 @@
 {% load static %}
-{% block hero %}
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
 </head>
 <div class="container">
   <div class="gallery-title">
-<a href="{% url 'main:gallery' %}">Back to Gallery page</a>
-
-      {% for gallery_description in description %}
-
-  <p>{{gallery_description.description|default_if_none:"" }}</p></div> {% endfor %}
+      <div class="text-right">
+          <a href="{% url 'main:gallery' %}">Back to Gallery page</a></div>
+      <div class="text-center">
+      {% for i in description %}
+  <h1>{{i.name }}.</h1>
+      </div>
+       {% endfor %}
+  </div>
 </div>
-{% endblock %}
 </body>
   <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <h2 class="post-title text-center">{{ img.title }}</h2>
-
-            <p class="text-center">Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            <div class="divide10"></div>
-            {% for img in pictures %}
-
-            <ul class="basic-gallery text-center">
-
-              <li><img src="{{ img.image.url }}" class="gallery-images-detail" alt="" /></li>
+              {% for img in pictures %}
+              <ul class="basic-gallery text-center">
+                  <li><img src="{{ img.image.url }}" class="gallery-images-detail" alt="" /></li>
             </ul>
+              {{ img.timestamp }}
           </div>
         </div>
       </div>

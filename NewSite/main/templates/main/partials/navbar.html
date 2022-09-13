@@ -2,7 +2,7 @@
 <div class="navbar navbar-default default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <div class="navbar-brand"><a href="index.html"><img src="#" srcset="{% static  'style/images/logo.png, style/images/logo@2x.png' %}" alt="" /></a></div>
+        <div class="navbar-brand"><a href="{% url 'main:home' %}">Robert Melen Photography</a></div>
         <div class="nav-bars-wrapper">
           <div class="nav-bars-inner">
             <div class="nav-bars" data-toggle="collapse" data-target=".navbar-collapse"><span></span></div>
@@ -24,7 +24,7 @@
       <div class="nav-wrapper">
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Portfolio <span class="caret"></span></a>
+            <li><a href="{% url 'main:home' %}">Home<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="index.html">Onepage Gallery</a></li>
                 <li><a href="index2.html">Lightbox Gallery</a></li>
