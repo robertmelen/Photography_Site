@@ -4,8 +4,8 @@
 </head>
 <div class="container">
   <div class="gallery-title">
-      <div class="text-right">
-          <a href="{% url 'main:gallery' %}">Back to Gallery page</a></div>
+      <div class="text-left">
+          <a href="{% url 'main:gallery' %}"><h6>Back to Gallery page</h6></a></div>
       <div class="text-center">
       {% for i in description %}
   <h1>{{i.name }}.</h1>
@@ -27,5 +27,5 @@
         </div>
       </div>
 {% endfor %}
-<h1>Placeholder for further galleries</h1>
+
 

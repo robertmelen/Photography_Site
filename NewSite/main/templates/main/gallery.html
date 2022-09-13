@@ -7,10 +7,11 @@
 <div class="tiles">
         <div class="items row row-offset-0">
             <div class="modal-body">
-                <div class="container-fluid">
+                <div class="container">
                 <h1>Galleries</h1>
-                <p>Please click on a thumbnail to view entire set</p></div>
-
+                <p>Please click on a thumbnail to view entire set</p>
+                </div>
+<div class="container">
 {% for img in objects_list %}
     <div class="item col-xs-6 col-sm-6 col-md-4">
         <figure class="overlay"> <a hx-post="{{ request.path }}?slug={{ img.slug }}" hx-target=".modal-body" hx-swap="outerHTML"
@@ -26,5 +27,6 @@
 {% endfor %}
             </div>
         </div>
+    <div>
 {% endblock %}
-
+    </div>
