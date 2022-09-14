@@ -1,5 +1,5 @@
 from django.urls import path, include
-
+from django.urls import re_path
 from . import views
 
 
@@ -11,8 +11,9 @@ urlpatterns = [
     path("contact", views.ContactView.as_view(), name="contact"),
     path("select/<slug:slug>", views.SelectView.as_view(), name="select"),
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
-    path("gallery", views.GalleryView, name="gallery"),
-    #path("gallery-detail/<slug:slug>", views.GalleryDetailView, name="gallery_detail"),
+    path("gallery/<slug:slug>", views.GalleryView, name="gallery_with_slug"),
+    path("gallery/", views.GalleryView, name="gallery"),
+    #path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
 
 
 

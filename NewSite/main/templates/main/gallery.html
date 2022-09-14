@@ -6,17 +6,19 @@
 {% endblock %}
 <div class="tiles">
         <div class="items row row-offset-0">
-            <div class="modal-body">
+
+            <div class="gallery-body">
                 <div class="container">
                 <h1>Galleries</h1>
                 <p>Please click on a thumbnail to view entire set</p>
                 </div>
 <div class="container">
+
 {% for img in objects_list %}
     <div class="item col-xs-6 col-sm-6 col-md-4">
         <figure class="overlay"> <a hx-post="{{ request.path }}?slug={{ img.slug }}"
-                                    hx-target=".modal-body"
-                                    hx-swap="outerHTML"
+                                    hx-target=".gallery-body"
+                                    hx-swap="afterend"
                                     hx-push-url="/gallery/{{ img.slug }}"
                     hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
             <div class="text-overlay caption">

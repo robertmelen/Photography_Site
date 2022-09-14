@@ -2,10 +2,15 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
 </head>
+
 <div class="container">
   <div class="gallery-title">
       <div class="text-left">
-          <a href="{% url 'main:gallery' %}"><h6>Back to Gallery page</h6></a></div>
+          <a href="{% url 'main:gallery' %}"
+                  hx-target=".gallery-body"
+                  hx-push-url="/gallery"
+                  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                  <h6>Back to Gallery page</h6></a></div>
       <div class="text-center">
       {% for i in description %}
   <h1>{{i.name }}.</h1>
