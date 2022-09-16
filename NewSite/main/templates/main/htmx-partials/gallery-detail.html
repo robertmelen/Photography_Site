@@ -19,17 +19,16 @@
   </div>
 </div>
 </body>
-
-  <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <h2 class="post-title text-center">{{ img.title }}</h2>
+    <h2 class="post-title text-center">{{ img.title }}</h2>
               {% for img in pictures %}
               <ul class="basic-gallery text-center">
-                  <li><img src="{{ img.image.url }}" class="gallery-images-detail" alt="" /></li>
-            </ul>
-              {{ img.timestamp }}
-          </div>
+                  <li><img class="gallery-images-detail" src="{{ MEDIA_RL }} {{ img.image.url }}" alt="" /></li>
+             </ul>
+            <div #id="caption" class="container">
+            {{ img.meta }}</div>
+            </div>
+            </div>
+
         </div>
       </div>
 {% endfor %}

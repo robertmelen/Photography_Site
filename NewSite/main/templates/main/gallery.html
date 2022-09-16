@@ -18,9 +18,10 @@
                 </div>
 
     <div class="container-fluid">
-    {% for img in objects_list %}
 
-    <div class="item col-xs-6 col-sm-6 col-md-3">
+{% for img in objects_list %}
+    <div class="item col-xs-6 col-sm-10 col-md-3">
+
         <figure class="overlay"> <a hx-get="{{ request.path }}?slug={{ img.slug }}"
                                     hx-target=".gallery-body"
                                     hx-swap="here"

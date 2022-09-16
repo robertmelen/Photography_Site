@@ -1,7 +1,8 @@
 from django.db import models
-from PIL import Image
+from PIL import Image, ExifTags
 from slugger import AutoSlugField
 from django.urls import reverse
+
 
 # Create your models here.
 
@@ -43,13 +44,26 @@ class Media(models.Model):
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    meta = models.CharField(max_length=2000, null=True, blank=True)
 
+
+
+    def save(self, *args, **kwargs):
+        super(Media, self).save(*args, **kwargs)
+        """Get EXIF"""
+        im = Image.open(self.image)
+        try:
+            info = im.getexif()[0x010e]
+            self.meta = info
+        except KeyError:
+            pass
+        super(Media, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Media"
-
-    class Meta:
         ordering = ['order']
+
+
 
 
     def __str__(self):
