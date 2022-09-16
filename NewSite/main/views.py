@@ -1,16 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-
+from django.http import HttpResponse
+from django.urls import reverse
 from . models import Media, Category, Albums
 
 
-# Create your views here.
 
 
 class HomeView(TemplateView):
-
     template_name = "main/index.html"
 
     def get_context_data(self, **kwargs):
@@ -65,10 +63,9 @@ class SelectView(ListView):
         return context
 
 
-    #def get_queryset(self):
-        #self.publisher = get_object_or_404(Media, name=self.kwargs['pk'])
-        #return Media.objects.filter(categories__title=self.publisher)
 
+#thi sCBV is for the main index slidshow and is view for the partial gallery select which
+#worked well with the template ajax so no need to change this too much
 
 class GallerySelectView(ListView):
 
@@ -87,48 +84,33 @@ class GallerySelectView(ListView):
         return context
 
 
-    #def get_queryset(self):
-        #self.publisher = get_object_or_404(Media, name=self.kwargs['pk'])
-        #return Media.objects.filter(categories__title=self.publisher)
-
-
-
-#
-# def GalleryDetailView(request):
-#     pass
-
-
-
-
+#slug=None is optional paramater that deals with page refresh after HTMX view for Gallery
 
 def GalleryView(request, slug=None):
 
     if request.htmx:
-        slug = request.GET.get('slug')
-        pics = get_object_or_404(Albums, slug=slug)
-        context = {'pictures': Media.objects.filter(album_pictures=pics),
-                   'description': Albums.objects.filter(slug=slug)}
-        return render(request, 'main/gallery-detail.html', context=context)
+        try:
+            slug = request.GET.get('slug')
+            pics = get_object_or_404(Albums, slug=slug)
+            context = {'pictures': Media.objects.filter(album_pictures=pics),
+                       'description': Albums.objects.filter(slug=slug)}
+            return render(request, 'main/htmx-partials/gallery-detail.html', context=context)
+        except:
+            #this pass fixes getting a error 404 on refresh
+            pass
+        
 
     context = {'objects_list': Albums.objects.all()}
     return render(request, 'main/gallery.html', context=context)
 
+#View function that handles gallery back button to refresh to main gallery page
+#as seen here https://rajasimon.io/blog/htmx-server-side-redirect/
 
+def gallery_back(request):
+    response = HttpResponse("Okay")
 
-#def GalleryBackView(request):
-    #if request.htmx:
-        #return render(request, 'main/gallery-detail.html')
-
-# class GalleryDetailView(DetailView):
-#
-#     template_name = "main/gallery-detail.html"
-#
-#     def get(self, request, *args, **kwargs):
-#          pictures = get_object_or_404(Albums, slug=kwargs['slug'])
-#          pictures_all = Media.objects.filter(album_pictures=pictures)
-#          print(pictures_all)
-#          context = {'pictures': pictures_all}
-#          return render(request, 'main/gallery-detail.html', context)
+    response["HX-Redirect"] = reverse("main:gallery")
+    return response
 
 
 
@@ -137,12 +119,6 @@ def GalleryView(request, slug=None):
 
 
 
-    #WORKING QUERYSEWTR FILTER
-    #def get_queryset(self):
-
-        #gallery = get_object_or_404(Albums, slug=self.kwargs['slug'])
-        #print(gallery)
-        #return Media.objects.filter(album_pictures=gallery)
 
 
 
@@ -150,19 +126,8 @@ def GalleryView(request, slug=None):
 
 
 
-    #def get_context_data(self, **kwargs):
-        #context = super(GalleryDetailView, self).get_context_data(**kwargs)
-        #context['object_list'] =
-        #print(context['object_list'])
-            #Media.objects.filter(gallery=self.gallery)
-        #return context
 
 
 
-#FUNCTION BASED TEST DIDNT WORK
-#def gallery_list(request, slug):
-    #image_list = get_object_or_404(Albums, slug=slug)
-    #images = Media.objects.filter(album_pictures=image_list)
 
-    #return render(request, 'main/gallery-detail.html',
-                  #{'images': images})
+

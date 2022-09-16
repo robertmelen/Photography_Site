@@ -1,28 +1,8 @@
-.text-center {
-  padding-top:40px;
+#gallery-head{
+    padding-top: 10px
 }
 
-.gallery-images-detail {
-
-    width:1000px;
-
-}
-
-.gallery-title {
-
-    padding-top:0px;
-
-    }
-
-
-.gallery-description {
-
-    padding-top:0px;
-    color:#FFC0CB;
-}
-
-div text-left {
-    .h6{
-    color:#FFC0CB;
-    }
+.gallery-images-detail
+{
+    width: 1500px;
 }

@@ -3,22 +3,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
 </head>
 
-<div class="container">
+<div class="container-fluid">
   <div class="gallery-title">
       <div class="text-left">
-          <a href="{% url 'main:gallery' %}"
-                  hx-target=".gallery-body"
-                  hx-push-url="/gallery"
-                  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                  <h6>Back to Gallery page</h6></a></div>
+          <button class="btn btn-outline-light" hx-get="/gallery-back"
+             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                  Back to Gallery page</button></div>
       <div class="text-center">
       {% for i in description %}
+
   <h1>{{i.name }}.</h1>
+          <p class="font-weight-light">Created:{{ i.created }}</p>
       </div>
        {% endfor %}
   </div>
 </div>
 </body>
+
   <div class="modal inverse-wrapper modal-transparent move-from-top" id="myModal1" tabindex="-1" role="dialog"> <a href="#" class="btn close-button" data-dismiss="modal" aria-label="Close"></a>
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">

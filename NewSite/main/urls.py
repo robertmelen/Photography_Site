@@ -13,6 +13,8 @@ urlpatterns = [
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
     path("gallery/<slug:slug>", views.GalleryView, name="gallery_with_slug"),
     path("gallery/", views.GalleryView, name="gallery"),
+    path("gallery-back/", views.gallery_back, name="gallery-back"),
+
     #path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
 
 
