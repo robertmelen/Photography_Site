@@ -44,7 +44,7 @@ class Media(models.Model):
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    meta = models.CharField(max_length=2000, null=True, blank=True)
+    meta = models.CharField(max_length=2000, null=True, blank=True, editable=True)
 
 
 
@@ -54,7 +54,9 @@ class Media(models.Model):
         im = Image.open(self.image)
         try:
             info = im.getexif()[0x010e]
-            self.meta = info
+            changed_info = info
+            if changed_info != info:
+                self.meta = info
         except KeyError:
             pass
         super(Media, self).save(*args, **kwargs)

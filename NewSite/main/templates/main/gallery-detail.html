@@ -1,13 +1,16 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
-</head>
+{% block hero %}
+<div class="container">
+{{ pics_two.name }}
+    </div>
+{% endblock %}
 
+{% block content %}
 <div class="container-fluid">
   <div class="gallery-title">
       <div class="text-left">
-          <button class="btn btn-outline-light" hx-get="/gallery-back"
-             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+          <button class="btn btn-outline-light"><a href="{% url 'main:gallery' %}">
                   Back to Gallery page</button></div>
       <div class="text-center">
       {% for i in description %}
@@ -20,9 +23,9 @@
 </div>
 </body>
     <h2 class="post-title text-center">{{ img.title }}</h2>
-              {% for img in pictures %}
+              {% for img in pics %}
               <ul class="basic-gallery text-center">
-                  <li><img class="gallery-images-detail" src="{{ MEDIA_RL }} {{ img.image.url }}" alt="" /></li>
+                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}" alt="" /></li>
              </ul>
             <div #id="caption" class="container">
             {{ img.meta }}</div>
@@ -32,5 +35,6 @@
         </div>
       </div>
 {% endfor %}
+{% endblock %}
 
 

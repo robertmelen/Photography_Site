@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.urls import reverse
 from . models import Media, Category, Albums
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -86,22 +87,21 @@ class GallerySelectView(ListView):
 
 #slug=None is optional paramater that deals with page refresh after HTMX view for Gallery
 
-def GalleryView(request, slug=None):
+def GalleryView(request):
+    objects_list = Albums.objects.all()
+    return render(request, 'main/gallery.html', {'objects_list': objects_list})
 
-    if request.htmx:
-        try:
-            slug = request.GET.get('slug')
-            pics = get_object_or_404(Albums, slug=slug)
-            context = {'pictures': Media.objects.filter(album_pictures=pics),
-                       'description': Albums.objects.filter(slug=slug)}
-            return render(request, 'main/htmx-partials/gallery-detail.html', context=context)
-        except:
-            #this pass fixes getting a error 404 on refresh
-            pass
-        
 
-    context = {'objects_list': Albums.objects.all()}
-    return render(request, 'main/gallery.html', context=context)
+def Gallery_Detail(request, slug):
+    pics = get_object_or_404(Albums, slug=slug)
+    gallery_images = Media.objects.filter(album_pictures=pics)
+
+    return render(request, 'main/gallery-detail.html', {'pics': gallery_images, 'pics_two': pics})
+
+
+
+
+
 
 #View function that handles gallery back button to refresh to main gallery page
 #as seen here https://rajasimon.io/blog/htmx-server-side-redirect/
@@ -132,5 +132,25 @@ def gallery_back(request):
 
 
 
-
+  # if request.htmx:
+  #       try:
+  #           slug = request.GET.get('slug')
+  #           pics = get_object_or_404(Albums, slug=slug)
+  #           pictures = Media.objects.filter(album_pictures=pics)
+  #           page = request.GET.get('page', 1)
+  #           paginator = Paginator(pictures, 2)
+  #
+  #           try:
+  #               pics = paginator.page(page)
+  #           except PageNotAnInteger:
+  #               pics = paginator.page(1)
+  #           except EmptyPage:
+  #               pics  = paginator.page(paginator.num_pages)
+  #
+  #           context = {'pics': pictures,
+  #                      'description': Albums.objects.filter(slug=slug)}
+  #           return render(request, 'main/htmx-partials/gallery-detail.html', context=context)
+  #       except:
+  #           #this pass fixes getting a error 404 on refresh
+  #           pass
 
