@@ -2,9 +2,20 @@ from django.db import models
 from PIL import Image, ExifTags
 from slugger import AutoSlugField
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 
-# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    facebook = models.CharField(max_length=300, blank=True, null=True)
+    instagram = models.CharField(max_length=300, blank=True, null=True)
+    linkedin = models.CharField(max_length=300, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user)
 
 
 class Category(models.Model):
@@ -25,6 +36,7 @@ class Albums(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True,
                                    help_text="Gallery description on gallery page")
     slug = AutoSlugField(populate_from='name')
+    copyright_info = models.CharField(max_length=200, null=True, blank=True,)
     created = models.DateTimeField()
     visable = models.BooleanField(default=False)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
@@ -39,12 +51,12 @@ class Albums(models.Model):
 
 class Media(models.Model):
 
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="media")
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    meta = models.CharField(max_length=2000, null=True, blank=True, editable=True)
+    meta = models.TextField(max_length=2000, null=True, blank=True, editable=True)
 
 
 
@@ -55,8 +67,11 @@ class Media(models.Model):
         try:
             info = im.getexif()[0x010e]
             changed_info = info
-            if changed_info != info:
+            if self.meta == None:
                 self.meta = info
+                super(Media, self).save(*args, **kwargs)
+            elif self.meta != None and changed_info != info:
+                 self.meta = info
         except KeyError:
             pass
         super(Media, self).save(*args, **kwargs)
@@ -64,9 +79,6 @@ class Media(models.Model):
     class Meta:
         verbose_name_plural = "Media"
         ordering = ['order']
-
-
-
 
     def __str__(self):
         return self.image.url

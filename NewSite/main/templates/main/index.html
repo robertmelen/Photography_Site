@@ -1,21 +1,9 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block menu %}
-      <div id="js-inline-filter" class="cbp-filter-container text-center">
-        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"><span>All</span></div>
-        <div data-filter=".nature" class="cbp-filter-item"><span>news</span></div>
-        <div data-filter=".conceptual" class="cbp-filter-item"><span>sdasd</span></div>
-        <div data-filter=".food-drink" class="cbp-filter-item"><span>Food & Drink</span></div>
-        <div data-filter=".portrait" class="cbp-filter-item"><span>Portrait</span></div>
-      </div>
-<div class="cbp-filter-container text-center">
-    <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"><span>All</span></div>
-    {% for a in image_categories %}
-    <div data-filter=".food-drink" class="cbp-filter-item">
-        {% for img in main_images %}
-        <a href="{% url 'main:select' img.categories.slug %}">
-            {% ifchanged a %}<span>{{ a }}</span>{% endifchanged %}</a>{% endfor %}</div>
-    {% endfor %}
+
+<div class="container-fluid">
+    <h7>Please click an image below to view a slideshow from that category</h7>
 </div>
 {% endblock %}
 {% block content %}

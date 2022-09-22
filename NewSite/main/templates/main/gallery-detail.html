@@ -1,9 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block hero %}
-<div class="container">
-{{ pics_two.name }}
-    </div>
+
 {% endblock %}
 
 {% block content %}
@@ -13,22 +11,26 @@
           <button class="btn btn-outline-light"><a href="{% url 'main:gallery' %}">
                   Back to Gallery page</button></div>
       <div class="text-center">
-      {% for i in description %}
-
-  <h1>{{i.name }}.</h1>
-          <p class="font-weight-light">Created:{{ i.created }}</p>
+<h4>{{ pics_two.name }}</h4>
+    <p>{{ pics_two.description }}</p>
+          <p class="font-weight-light">Created: {{ pics_two.created }}</p>
+          <h6>{{ pics_two.copyright_info }}</h6>
       </div>
-       {% endfor %}
+
   </div>
 </div>
 </body>
-    <h2 class="post-title text-center">{{ img.title }}</h2>
+    <h2 class="post-title text-center">{{ img.name }}</h2>
+
               {% for img in pics %}
               <ul class="basic-gallery text-center">
-                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}" alt="" /></li>
+                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}" alt="" style="padding-top: 20px;"/></li>
              </ul>
             <div #id="caption" class="container">
-            {{ img.meta }}</div>
+            {% if img.meta != None %}
+            {{ img.meta }}
+            {% endif %}</div>
+
             </div>
             </div>
 
