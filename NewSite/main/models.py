@@ -18,6 +18,7 @@ class Profile(models.Model):
         return str(self.user)
 
 
+
 class Category(models.Model):
     title = models.CharField(max_length=200, null=True)
     visable = models.BooleanField(default=False, help_text="Make visable to appear on gallery category menu")
@@ -85,3 +86,29 @@ class Media(models.Model):
 
 
 
+#BLOG STUFF
+
+class BlogPost(models.Model):
+    STATUS = (
+        ('published', 'Published'),
+        ('unpublished', 'Unpublished'),
+    )
+
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    slug = AutoSlugField(populate_from='title')
+    body = models.TextField()
+    main_image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
+    post_images = models.ManyToManyField(Media, related_name="Blog_images")
+    publish = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    edited = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=STATUS, default='unpublished')
+
+    def __str__(self):
+        return str(self.author) + " Blog Title: " + self.title
+
+    def get_absolute_url(self):
+        return reverse('blogs')

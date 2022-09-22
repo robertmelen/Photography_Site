@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.urls import reverse
-from . models import Media, Category, Albums
+from . models import Media, Category, Albums, BlogPost
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -99,18 +99,12 @@ def Gallery_Detail(request, slug):
     return render(request, 'main/gallery-detail.html', {'pics': gallery_images, 'pics_two': pics})
 
 
+def BlogList(request):
+    posts = BlogPost.objects.all()
+    return render(request, 'main/blog-posts.html', {'posts': posts})
 
 
 
-
-#View function that handles gallery back button to refresh to main gallery page
-#as seen here https://rajasimon.io/blog/htmx-server-side-redirect/
-
-def gallery_back(request):
-    response = HttpResponse("Okay")
-
-    response["HX-Redirect"] = reverse("main:gallery")
-    return response
 
 
 
