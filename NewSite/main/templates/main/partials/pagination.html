@@ -1,18 +1,31 @@
 
-<div class="pagination">
-    <ul>
-{% if page.has_previous %}
-              <li><a class="btn btn-square btn-icon" href="?page{{ page.previous_page_number }}"><i class="ion-android-arrow-back"></i></a></li>{% endif %}
-                {% for pg in page.paginator.page_range %}
-                {% if page.number == pg %}
-                    <li><a href="?page={{pg}}" class="btn btn-default">{{pg}}</a></li>
-                {% else %}
-                    <li><a href="?page={{pg}}" class="btn">{{pg}}</a></li>
-                 {% endif %}
-                {% endfor %}
 
-              <li class="active"><a class="btn btn-square" href="#"><span>{{ page.number }} of {{ page.paginator.num_pages }}</span></a></li>
-                {% if page.has_next %}
-              <li><a class="btn btn-square btn-icon" href="?page={{ page.next_page_number }}"><i class="ion-android-arrow-forward"></i></a></li>{% endif %}
-            </ul>
-</div>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination" >
+{% if page.has_previous %}
+<li class="page-item" >
+  <a class="page-link" href="?page=1" aria-label="Previous">
+    <span aria-hidden="true">&laquo;</span>
+    <span class="sr-only">begin</span>
+  </a>
+</li>   {% endif %}
+
+{% for n in page.paginator.page_range %}
+  {% if page.number == n %}
+    <li class="page-item active">
+      <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+    </li>
+  {% elif n > page.number|add:'-3' and n < page.number|add:'3' %}
+    <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+  {% endif %}
+{% endfor %}
+
+{% if page.has_next %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ page.paginator.num_pages }}" aria-label="Next">
+      <span aria-hidden="true">&raquo;</span>
+      <span class="sr-only">end</span>
+    </a>
+  </li>
+  {% endif %}   </ul> </nav>
