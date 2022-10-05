@@ -1,0 +1,18 @@
+
+<div class="pagination">
+    <ul>
+{% if page.has_previous %}
+              <li><a class="btn btn-square btn-icon" href="?page{{ page.previous_page_number }}"><i class="ion-android-arrow-back"></i></a></li>{% endif %}
+                {% for pg in page.paginator.page_range %}
+                {% if page.number == pg %}
+                    <li><a href="?page={{pg}}" class="btn btn-default">{{pg}}</a></li>
+                {% else %}
+                    <li><a href="?page={{pg}}" class="btn">{{pg}}</a></li>
+                 {% endif %}
+                {% endfor %}
+
+              <li class="active"><a class="btn btn-square" href="#"><span>{{ page.number }} of {{ page.paginator.num_pages }}</span></a></li>
+                {% if page.has_next %}
+              <li><a class="btn btn-square btn-icon" href="?page={{ page.next_page_number }}"><i class="ion-android-arrow-forward"></i></a></li>{% endif %}
+            </ul>
+</div>

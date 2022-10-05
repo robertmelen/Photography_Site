@@ -97,7 +97,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     blog_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    slug = AutoSlugField(populate_from='title')
+    slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
     main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)
     post_images = models.ManyToManyField(Media, related_name="Blog_images")

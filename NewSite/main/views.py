@@ -101,8 +101,16 @@ def Gallery_Detail(request, slug):
 
 def BlogList(request):
     posts = BlogPost.objects.all()
+    paginator = Paginator(posts, 2)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'main/blog-posts.html', {'posts': posts})
+    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page})
 
 
 
