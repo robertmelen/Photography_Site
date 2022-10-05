@@ -101,6 +101,7 @@ def Gallery_Detail(request, slug):
 
 def BlogList(request):
     posts = BlogPost.objects.all()
+
     return render(request, 'main/blog-posts.html', {'posts': posts})
 
 

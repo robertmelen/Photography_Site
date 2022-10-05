@@ -99,7 +99,7 @@ class BlogPost(models.Model):
     blog_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = AutoSlugField(populate_from='title')
     body = models.TextField()
-    main_image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
+    main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)
     post_images = models.ManyToManyField(Media, related_name="Blog_images")
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
