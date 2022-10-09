@@ -111,4 +111,9 @@ class BlogPost(models.Model):
         return str(self.author) + " Blog Title: " + self.title
 
     def get_absolute_url(self):
-        return reverse('blogs')
+        return reverse('main:post_detail',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+

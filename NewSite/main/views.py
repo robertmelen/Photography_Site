@@ -112,6 +112,11 @@ def BlogList(request):
 
     return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page})
 
+def post_detail(request, year, month, day, post):
+    post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,
+                             publish__day=day)
+    return render(request, "main/post-detail.html", {'post': post})
+
 
 
 
