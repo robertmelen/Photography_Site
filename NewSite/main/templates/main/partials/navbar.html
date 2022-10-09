@@ -31,13 +31,8 @@
               </ul>
             </li>
             <li><a href="{% url 'main:gallery' %}">Galleries</a></li>
-            <li><a href="#">Blog <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="blog.html">Blog with Sidebar</a></li>
-                <li><a href="blog2.html">Blog No Sidebar</a></li>
-                <li><a href="blog-post.html">Blog Post with Sidebar</a></li>
-                <li><a href="blog-post2.html">Blog Post No Sidebar</a></li>
-              </ul>
+            <li><a href="{% url 'main:blog-posts' %}">Blogs<span class="caret"></span></a>
+
             </li>
             <li><a href="#!">Pages <span class="caret"></span></a>
               <ul class="dropdown-menu">
