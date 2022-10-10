@@ -100,6 +100,8 @@ def Gallery_Detail(request, slug):
 
 
 def BlogList(request):
+    #blog_posts = BlogPost.objects.all()
+    #categories = blog_posts.blog_category
     posts = BlogPost.objects.all()
     paginator = Paginator(posts, 2)
     page = request.GET.get('page')
@@ -110,7 +112,7 @@ def BlogList(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page})
+    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page,})
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,
