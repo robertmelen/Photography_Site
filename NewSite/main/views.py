@@ -103,7 +103,7 @@ def Gallery_Detail(request, slug):
 def BlogList(request):
 
     categories = Post_Category.objects.all()
-    count_cats = BlogPost.objects.all()
+
     posts = BlogPost.objects.all()
     paginator = Paginator(posts, 2)
     page = request.GET.get('page')
