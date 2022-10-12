@@ -32,6 +32,18 @@ class Category(models.Model):
         return str(self.title)
 
 
+class Post_Category(models.Model):
+    title = models.CharField(max_length=200, null=True)
+    slug = AutoSlugField(populate_from='title')
+
+    def __str__(self):
+        return str(self.title)
+
+
+
+
+
+
 class Albums(models.Model):
     name = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True, blank=True,
@@ -96,7 +108,7 @@ class BlogPost(models.Model):
 
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    blog_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    blog_category = models.ForeignKey(Post_Category, on_delete=models.CASCADE)
     slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
     main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)

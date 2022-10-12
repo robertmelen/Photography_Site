@@ -3,8 +3,9 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.urls import reverse
-from . models import Media, Category, Albums, BlogPost
+from . models import Media, Category, Albums, BlogPost, Post_Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 
 
 
@@ -100,8 +101,9 @@ def Gallery_Detail(request, slug):
 
 
 def BlogList(request):
-    #blog_posts = BlogPost.objects.all()
-    #categories = blog_posts.blog_category
+
+    categories = Post_Category.objects.all()
+    count_cats = BlogPost.objects.all()
     posts = BlogPost.objects.all()
     paginator = Paginator(posts, 2)
     page = request.GET.get('page')
@@ -112,7 +114,7 @@ def BlogList(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page,})
+    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page, 'categories': categories })
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,
