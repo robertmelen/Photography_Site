@@ -1,13 +1,13 @@
 from .models import Profile, Category, BlogPost
 
 
-def about_us_pic(request):
-
+def user_info(request):
    user = request.user
    current_user = Profile.objects.get(user=user)
+   return {'user': current_user }
 
-
-   pic = current_user.image
-   return {'pic': pic }
+def post_info(request):
+  popular_posts = BlogPost.objects.filter(status='published').order_by('-created')[0:3]
+  return {'popular_posts': popular_posts}
 
 
