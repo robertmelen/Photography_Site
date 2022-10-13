@@ -15,7 +15,7 @@ urlpatterns = [
     path("gallery/", views.GalleryView, name="gallery"),
     path("blog-posts/", views.BlogList, name="blog-posts"),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-
+    path("category/<int:pk>", views.category_detail, name='category_detail'),
 
     #path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
 
