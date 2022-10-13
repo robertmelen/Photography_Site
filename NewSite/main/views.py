@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
@@ -6,6 +6,7 @@ from django.urls import reverse
 from . models import Media, Category, Albums, BlogPost, Post_Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
+from .forms import CommentForm
 
 
 
@@ -121,7 +122,18 @@ def BlogList(request):
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,
                              publish__day=day)
-    return render(request, "main/post-detail.html", {'post': post})
+    new_comment = None
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        comment_form = CommentForm()
+    return render(request, "main/post-detail.html", {'post': post, 'new_comment': new_comment,
+                                                     'comment_form': comment_form,})
 
 
 

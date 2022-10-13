@@ -115,10 +115,11 @@
                         <div class="message">
                           <div class="message-inner">
                             <div class="info">
+                              #{{ forloop.counter }}
                               <h5><a href="#">{{ i.name }}</a></h5>
                               <div class="meta"> <span class="date">{{ i.created }}</span><span class="reply"><a class="link-effect" href="#">Reply</a></span> </div>
                             </div>
-                            <p>{{ i.body }}</p>
+                            <p>{{ i.body|linebreaks }}</p>
                              {% endfor %}
                           </div>
                         </div>
@@ -131,20 +132,10 @@
                   <div class="comment-form-wrapper text-left">
                     <h4>Would you like to share your thoughts?</h4>
                     <p>Your email address will not be published. Required fields are marked *</p>
-                    <form class="comment-form" name="form_name" action="#" method="post">
-                      <div class="name-field">
-                        <input type="text" name="first" title="Name*"  value="Name*" onfocus="this.value=''" onblur="this.value='Name*'"/>
-                      </div>
-                      <div class="email-field">
-                        <input type="text" name="first" title="Email*"  value="Email*" onfocus="this.value=''" onblur="this.value='Email*'" />
-                      </div>
-                      <div class="website-field">
-                        <input type="text" name="first" title="Website"  value="Website" onfocus="this.value=''" onblur="this.value='Website'" />
-                      </div>
-                      <div class="message-field">
-                        <textarea name="textarea" id="textarea" rows="5" cols="30" title="Enter your comment here..."></textarea>
-                      </div>
+                    <form class="comment-form" name="form_name" action="#" method="POST">
+                     {{ comment_form }}
                       <input type="submit" value="Submit" name="submit" class="btn btn-forest btn-submit" />
+                      {% csrf_token %}
                     </form>
                   </div>
                   <!-- /.comment-form-wrapper --> 
