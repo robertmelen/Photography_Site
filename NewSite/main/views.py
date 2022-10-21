@@ -91,7 +91,15 @@ class GallerySelectView(ListView):
 
 def GalleryView(request):
     objects_list = Albums.objects.all()
-    return render(request, 'main/gallery.html', {'objects_list': objects_list})
+    paginator = Paginator(objects_list, 10)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'main/gallery.html', {'objects_list': objects_list, 'posts': posts})
 
 
 def Gallery_Detail(request, slug):
