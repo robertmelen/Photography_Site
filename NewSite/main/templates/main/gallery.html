@@ -1,37 +1,31 @@
-
 {% extends "main/base.html" %}
 {% load static %}
 {% block content %}
-
 {% block hero %}
 {% endblock %}
 
-<div class="tiles">
-        <div class="items row row-offset-0">
+
             <div id="gallery-head" class="container-fluid">
                 <h1>Galleries</h1>
                 <p>Please click on a thumbnail to view entire set</p>
                 </div>
 
     <div class="container-fluid">
-
-{% for img in objects_list %}
-    <div class="item col-xs-6 col-sm-10 col-md-3">
-
-        <figure class="overlay"> <a href="{% url 'main:gallery-detail' img.slug %}">
-            <div class="text-overlay caption">
+        {% for img in objects_list %}
+        <div class="item col-xs-6 col-sm-10 col-md-2">
+            <figure class="overlay"> <a href="{% url 'main:gallery-detail' img.slug %}">
+                <div class="text-overlay caption">
                 <div class="info">
-
                     <h2 class="post-title">{{ img.name }}</h2>
                   <div class="meta"><span class="count">7 Photos</span><span class="category">Hobby</span></div>
                 </div>
             </div>
-
-              <img src="{{ img.image.image.url }}" alt="" style="width: 1000px;"/></a> </figure>
+            <img src="{{ img.image.image.url }}" alt="" style=""/></a> </figure>
+        </div>
+{% endfor %}
 
     </div>
 
-        {% endfor %}
-    </div>
        {% endblock %}
 
+    </div>
