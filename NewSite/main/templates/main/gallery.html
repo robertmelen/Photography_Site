@@ -9,25 +9,24 @@
 <div style="width:120%">
   {% for img in posts %}
       <div style="float:left; width:300px; height:300px; ">
+          <a href="{% url 'main:gallery-detail' img.slug %}">
           <img src="{{ img.image.image.url }}" class="img-thumbnail"  alt="">
-
-
-
-          <div style="padding: 5px;"><h6>{{ img.name }}:</h6> <small>{{ img.description }}</small></div>
-
+              <div style="padding: 5px;"><h6>{{ img.name }}: <small>{{ img.album_images.count }} images</small>
+              </h6><small>{{ img.description }}</small> </div>
       </div>
-
     {% endfor%}
-
+</div>
+</div>
+{% block footer %}
+{% endblock %}
+<div class="container">
+    <hr>
+    <div class="text-center" style="color: white;">© 2022 Robert Melen. All rights reserved.</div>
 </div>
 
-</div>
 
 
 
-
-
-<!-- Gallery -->
 
 
 
