@@ -48,7 +48,7 @@ class Albums(models.Model):
     name = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True, blank=True,
                                    help_text="Gallery description on gallery page")
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name', help_text="This is auto filled in from title")
     copyright_info = models.CharField(max_length=200, null=True, blank=True,)
     created = models.DateTimeField()
     visable = models.BooleanField(default=False)
