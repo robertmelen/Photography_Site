@@ -91,7 +91,7 @@ class GallerySelectView(ListView):
 
 def GalleryView(request):
     objects_list = Albums.objects.all()
-    paginator = Paginator(objects_list, 10)
+    paginator = Paginator(objects_list, 12)
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
