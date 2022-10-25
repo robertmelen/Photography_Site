@@ -4,7 +4,8 @@ from slugger import AutoSlugField
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Adjust
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -66,6 +67,8 @@ class Media(models.Model):
 
     timestamp = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="media")
+    thumbnail = ImageSpecField([Adjust(sharpness=1.1), ResizeToFill(500, 350)],
+                               source='image', format='JPEG', options={'quality': 100})
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
