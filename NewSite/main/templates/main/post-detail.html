@@ -11,11 +11,11 @@
             <div class="blog-posts">
               <div class="post">
                 <div class="post-content">
+
                   <h1 class="post-title text-center">{{ post.title }}</h1>
                   <div class="meta text-center"><span class="date">Published on {{ post.created }} by {{ post.author }}</span><span class="comments"><a href="#">7 Comments</a></span><span class="category"><a href="#">{{post.blog_category }}</a></span></div>
                   <figure><img src="style/images/art/bp1.jpg" alt="" /></figure>
-                  <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                  <p>Donec sed odio dui consectetur adipiscing elit. Etiam adipiscing tincidunt elit, eu convallis felis suscipit ut. Phasellus rhoncus tincidunt auctor. Nullam eu sagittis mauris. Donec non dolor ac elit aliquam tincidunt at at sapien. Aenean tortor libero, condimentum ac laoreet vitae, varius tempor nisi. Duis non arcu vel lectus. </p>
+                  {{ post.body | safe }}
                   <div class="divide10"></div>
                   <blockquote>
                     <p> Pellentesque non diam et tortor dignissim bibendum. Neque sit amet mauris egestas quis mattis velit fringilla. Curabitur viver justo sed scelerisque. Cras mattis consectetur purus sit amet fermentum. Aenean eu leo quam.</p>

@@ -67,7 +67,7 @@ class Media(models.Model):
 
     timestamp = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="media")
-    thumbnail = ImageSpecField([Adjust(sharpness=1.1), ResizeToFill(500, 350)],
+    thumbnail = ImageSpecField([Adjust(sharpness=1.1), ResizeToFill(800, 650)],
                                source='image', format='JPEG', options={'quality': 100})
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
@@ -76,21 +76,21 @@ class Media(models.Model):
 
 
 
-    def save(self, *args, **kwargs):
-        super(Media, self).save(*args, **kwargs)
-        """Get EXIF"""
-        im = Image.open(self.image)
-        try:
-            info = im.getexif()[0x010e]
-            changed_info = info
-            if self.meta == None:
-                self.meta = info
-                super(Media, self).save(*args, **kwargs)
-            elif self.meta != None and changed_info != info:
-                 self.meta = info
-        except KeyError:
-            pass
-        super(Media, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     super(Media, self).save(*args, **kwargs)
+    #     """Get EXIF"""
+    #     im = Image.open(self.image)
+    #     try:
+    #         info = im.getexif()[0x010e]
+    #         changed_info = info
+    #         if self.meta == None:
+    #             self.meta = info
+    #             super(Media, self).save(*args, **kwargs)
+    #         elif self.meta != None and changed_info != info:
+    #              self.meta = info
+    #     except KeyError:
+    #         pass
+    #     super(Media, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Media"
@@ -115,7 +115,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
     main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)
-    post_images = models.ManyToManyField(Media, related_name="Blog_images")
+    post_images = models.ManyToManyField(Media, blank=True, null=True, related_name="Blog_images")
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -12,7 +12,7 @@
         <div id="js-grid-inline" class="cbp cbp-l-grid-inline">
             {% for image in main_images %}
             <div class="cbp-item web-design print"> {% if image.categories.slug %} <a href="{% url 'main:select' image.categories.slug %}"class="cbp-caption cbp-singlePageInline">{% endif %}
-                <div class="cbp-caption-defaultWrap"> <img src="{{ MEDIA_URL }} {{ image.thumbnail.url }}"alt=""> </div>
+                <div class="cbp-caption-defaultWrap"> <img src="{{ image.thumbnail.url }}"alt=""> </div>
                     <div class="cbp-caption-activeWrap">
                         <div class="cbp-l-caption-alignCenter">
                             <div class="cbp-l-caption-body">
