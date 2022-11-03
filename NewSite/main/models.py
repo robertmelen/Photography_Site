@@ -38,7 +38,7 @@ class Post_Category(models.Model):
     slug = AutoSlugField(populate_from='title')
 
     def __str__(self):
-        return str(self.title)
+        return str(self.slug)
 
 
 
@@ -103,6 +103,15 @@ class Media(models.Model):
 
 #BLOG STUFF
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = AutoSlugField(populate_from='name', default="", help_text="This is auto filled in from name")
+
+    def __str__(self):
+        return self.name
+
+
+
 class BlogPost(models.Model):
     STATUS = (
         ('published', 'Published'),
@@ -112,6 +121,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     blog_category = models.ForeignKey(Post_Category, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
     slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
     main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)

@@ -109,13 +109,15 @@ def Gallery_Detail(request, slug):
     return render(request, 'main/gallery-detail.html', {'pics': gallery_images, 'pics_two': pics})
 
 
-def BlogList(request):
+def BlogList(request, slug=None, category_slug=None):
     categories = Post_Category.objects.all()
     posts = BlogPost.objects.all()
 
-
-
-
+    if slug:
+        posts = BlogPost.objects.filter(status="published", tags__slug=slug)
+    elif category_slug:
+        posts = BlogPost.objects.filter(status="published", blog_category__slug=category_slug)
+    print(posts)
     paginator = Paginator(posts, 2)
     page = request.GET.get('page')
     try:
@@ -125,7 +127,7 @@ def BlogList(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page, 'categories': categories})
+    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page, 'categories': categories, 'slug': slug })
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,
@@ -152,7 +154,14 @@ def category_detail(request, pk):
 
 
 
-
+def list_posts_by_tag(request, tag_id):
+    tag = get_object_or_404(BlogPost, id=tag_id)
+    posts = BlogPost.objects.filter(status="published", tags=tag)
+    context = {
+        "tag_name": tag.name,
+        "posts": posts
+    }
+    return render(request, "blog-posts", context)
 
 
 
