@@ -13,7 +13,7 @@
                 <div class="post-content">
                     {{ slug }}
                   <h1 class="post-title text-center">{{ post.title }}</h1>
-                  <div class="meta text-center"><span class="date">Published on {{ post.created }} by {{ post.author }}</span><span class="comments"><a href="#">7 Comments</a></span><span class="category"><a href="{% url 'main:blog_list_by_category' post.blog_category%}">{{ post.blog_category }}</a></span></div>
+                  <div class="meta text-center"><span class="date">Published on {{ post.created }} by {{ post.author }}</span><span class="comments"><a href="#">7 Comments</a></span><span class="category"><a href="{% url 'main:blog_list_by_category' post.blog_category %}">{{ post.blog_category }}</a></span></div>
                   <figure><img src="style/images/art/bp1.jpg" alt="" /></figure>
                   {{ post.post_category.set.all }}
                   {{ post.body | safe }}

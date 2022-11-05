@@ -18,3 +18,4 @@ def category_info(request):
   categories = Post_Category.objects.all()[0:2]
   return {'categories': categories}
 
+

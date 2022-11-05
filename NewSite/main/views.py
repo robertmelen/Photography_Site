@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.urls import reverse
-from . models import Media, Category, Albums, BlogPost, Post_Category
+from . models import Media, Category, Albums, BlogPost, Post_Category, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from .forms import CommentForm
@@ -109,16 +109,18 @@ def Gallery_Detail(request, slug):
     return render(request, 'main/gallery-detail.html', {'pics': gallery_images, 'pics_two': pics})
 
 
-def BlogList(request, slug=None, category_slug=None):
+def BlogList(request, slug=None, blog_category=None):
     categories = Post_Category.objects.all()
-    posts = BlogPost.objects.all()
-
+    object_list = BlogPost.objects.all()
     if slug:
-        posts = BlogPost.objects.filter(status="published", tags__slug=slug)
-    elif category_slug:
-        posts = BlogPost.objects.filter(status="published", blog_category__slug=category_slug)
-    print(posts)
-    paginator = Paginator(posts, 2)
+        tag = get_object_or_404(Tag, slug=slug)
+        object_list = object_list.filter(status="published", tags__slug=tag)
+    elif blog_category:
+        category = get_object_or_404(Post_Category, slug=blog_category)
+        object_list = object_list.filter(status="published", blog_category__slug=category)
+
+
+    paginator = Paginator(object_list, 2)
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
