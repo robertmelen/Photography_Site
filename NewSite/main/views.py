@@ -129,7 +129,9 @@ def BlogList(request, slug=None, blog_category=None):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page, 'categories': categories, 'slug': slug })
+    return render(request, 'main/blog-posts.html', {'posts': posts, 'page': page,
+                                                    'categories': categories, 'slug': slug,
+                                                    'blog_category': blog_category })
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post, status='published', publish__year=year, publish__month=month,

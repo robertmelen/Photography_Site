@@ -108,7 +108,7 @@ class Tag(models.Model):
     slug = AutoSlugField(populate_from='name', default="", help_text="This is auto filled in from name")
 
     def __str__(self):
-        return self.name
+        return self.slug
 
 
 

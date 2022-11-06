@@ -13,8 +13,6 @@ urlpatterns = [
     path("gallery_select/<slug:slug>", views.GallerySelectView.as_view(), name="gallery_select"),
     path("gallery/<slug:slug>", views.Gallery_Detail, name="gallery-detail"),
     path("gallery/", views.GalleryView, name="gallery"),
-
-
     path('tags/blog-posts/<slug:slug>/', views.BlogList, name='blog_list_by_tag'),
     path('category/blog-posts/<slug:blog_category>/', views.BlogList, name='blog_list_by_category'),
     path("blog-posts/", views.BlogList, name="blog-posts"),
@@ -23,7 +21,7 @@ urlpatterns = [
     path("tags/<int:tag_id>", views.list_posts_by_tag, name="tag")
 
 
-    #path("gallery-detail/<slug:slug>", views.GalleryDetailView.as_view(), name="gallery_detail"),
+
 
 
 

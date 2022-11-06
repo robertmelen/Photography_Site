@@ -1,4 +1,4 @@
-from .models import Profile, Category, BlogPost, Post_Category
+from .models import Profile, Category, BlogPost, Post_Category, Tags
 from django.contrib.auth.decorators import user_passes_test
 
 def user_info(request):
@@ -18,4 +18,8 @@ def category_info(request):
   categories = Post_Category.objects.all()[0:2]
   return {'categories': categories}
 
+
+def category_info(request):
+  tags = Tags.objects.all()
+  return {'tags': tags}
 
