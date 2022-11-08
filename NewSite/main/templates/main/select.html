@@ -5,7 +5,7 @@
       <div class="swiper-container image-carousel">
         <div class="swiper-wrapper">
             {% for image in object_list %}
-          <div class="swiper-slide"><img src="{{ MEDIA_URL }} {{ image.thumbnail.url }}" alt="" /></div>
+          <div class="swiper-slide"><img src="{{ image.thumbnail.url }}" alt="" /></div>
           {% endfor %}
         </div>
       </div>

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from . models import Media, Category, Albums, Profile, BlogPost, Post_Category, Comment, Tag
+from . models import Media, Category, Albums, Profile, BlogPost, Post_Category, Comment, Tag, \
+    Settings
 
 
 class BlogPostModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
@@ -16,6 +17,7 @@ admin.site.register(Tag, admin.ModelAdmin)
 
 admin.site.register(Post_Category)
 admin.site.register(Comment)
+admin.site.register(Settings)
 
 
 

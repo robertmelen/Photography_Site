@@ -43,9 +43,8 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['main_images'] = Media.objects.filter(visable=True)
+        context ['main_images'] = Media.objects.filter(visable=True, front_page=True)
         context ['image_categories'] = Category.objects.filter(visable=True)
-        #context['image_categories'] =
         return context
 
 
@@ -58,7 +57,7 @@ class SelectView(ListView):
 
         # Also, the self keyword is not needed here either -> self.category
         category = get_object_or_404(Category, slug=self.kwargs['slug'])  # updated
-        return Media.objects.filter(categories__title=category)  # updated
+        return Media.objects.filter(categories__title=category, visable=True)  # updated
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,24 +69,9 @@ class SelectView(ListView):
 #thi sCBV is for the main index slidshow and is view for the partial gallery select which
 #worked well with the template ajax so no need to change this too much
 
-class GallerySelectView(ListView):
-
-    template_name = "main/gallery_select.html"
-    model = Media
-
-    def get_queryset(self):
-        # Also, the self keyword is not needed here either -> self.category
-        category = get_object_or_404(Category, slug=self.kwargs['slug'])  # updated
-        return Media.objects.filter(categories__title=category)  # updated
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
-        context['main_images'] = Media.objects.filter(visable=True)
-        return context
 
 
-#slug=None is optional paramater that deals with page refresh after HTMX view for Gallery
+
 
 def GalleryView(request):
     objects_list = Albums.objects.all()

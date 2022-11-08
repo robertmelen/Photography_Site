@@ -13,7 +13,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     facebook = models.CharField(max_length=300, blank=True, null=True)
     instagram = models.CharField(max_length=300, blank=True, null=True)
-    linkedin = models.CharField(max_length=300, blank=True, null=True)
+    twitter = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
         return str(self.user)
@@ -71,26 +71,29 @@ class Media(models.Model):
                                source='image', format='JPEG', options={'quality': 100})
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
+    front_page = models.BooleanField(default=False)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     meta = models.TextField(max_length=2000, null=True, blank=True, editable=True)
 
 
 
-    # def save(self, *args, **kwargs):
-    #     super(Media, self).save(*args, **kwargs)
-    #     """Get EXIF"""
-    #     im = Image.open(self.image)
-    #     try:
-    #         info = im.getexif()[0x010e]
-    #         changed_info = info
-    #         if self.meta == None:
-    #             self.meta = info
-    #             super(Media, self).save(*args, **kwargs)
-    #         elif self.meta != None and changed_info != info:
-    #              self.meta = info
-    #     except KeyError:
-    #         pass
-    #     super(Media, self).save(*args, **kwargs)
+
+
+    def save(self, *args, **kwargs):
+        super(Media, self).save(*args, **kwargs)
+        """Get EXIF"""
+        im = Image.open(self.image)
+        try:
+            info = im.getexif()[0x010e]
+            changed_info = info
+            if self.meta == None:
+                self.meta = info
+                super(Media, self).save(*args, **kwargs)
+            elif self.meta != None and changed_info != info:
+                 self.meta = info
+        except KeyError:
+            pass
+        super(Media, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Media"
@@ -125,7 +128,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
     main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)
-    post_images = models.ManyToManyField(Media, blank=True, null=True, related_name="Blog_images")
+    post_images = models.ManyToManyField(Media, blank=True, related_name="Blog_images")
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -160,3 +163,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
+
+class Settings(models.Model):
+    main_hero_text = models.CharField(max_length=300, null=True, blank=True)
+    blog_about_title= models.CharField(max_length=200, null=True, blank=True)
+    blog_message = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return ("Settings for site")

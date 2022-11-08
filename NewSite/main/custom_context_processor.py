@@ -1,8 +1,7 @@
-from .models import Profile, Category, BlogPost, Post_Category, Tags
+from .models import Profile, Category, BlogPost, Post_Category, Tag, Settings
 from django.contrib.auth.decorators import user_passes_test
 
 def user_info(request):
-
     user = request.user
     if user.is_authenticated:
         current_user = Profile.objects.get(user=user)
@@ -19,7 +18,12 @@ def category_info(request):
   return {'categories': categories}
 
 
-def category_info(request):
-  tags = Tags.objects.all()
+def tags_info(request):
+  tags = Tag.objects.all()
   return {'tags': tags}
+
+def general_settings(request):
+  settings = Settings.objects.all()
+  return {'settings': settings}
+
 

@@ -5,12 +5,15 @@
 {% endblock %}
 
 <div class="container">
+    <div style="padding-top:10px;"><h2>Galleries</h2>
+    <p>Here, you can find a selection of galleries, click on a thumbnail to see the images</p></div>
     {% include "main/partials/pagination.html" with page=posts %}
+
 <div style="width:120%">
   {% for img in posts %}
-      <div style="float:left; width:300px; height:300px; ">
+      <div style="float:left; width:250px; height:250px; padding:10px; ">
           <a href="{% url 'main:gallery-detail' img.slug %}">
-          <img src="{{ img.image.image.url }}" class="img-thumbnail"  alt="">
+              <img src="{{ img.image.thumbnail.url }}" class="img-thumbnail"  alt=""></a>
               <div style="padding: 5px;"><h6>{{ img.name }}: <small>{{ img.album_images.count }} images</small>
               </h6><small>{{ img.description }}</small> </div>
       </div>
