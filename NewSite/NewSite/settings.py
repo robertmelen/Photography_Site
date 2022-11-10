@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '23542gffdsgsgsgfsdfgdsfgwtwgggdsfg'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,10 +111,10 @@ WSGI_APPLICATION = 'NewSite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'new_site',
+        'NAME': env("DATABASE_NAME"),
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'rob',
-        'PASSWORD': '93739373', }
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'), }
 }
 
 
@@ -166,9 +171,9 @@ INTERNAL_IPS = [
 ]
 
 
-AWS_ACCESS_KEY_ID = 'AKIAQSL6YLOIFCL7XZZW'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'photosite-static'
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',

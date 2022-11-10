@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="{% static  'style/images/favicon.jpg' %}">
+<title>Robert Melen Photography</title>
+<link rel="stylesheet" type="text/css" href="{% static  'style/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static  'style/css/plugins.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static  'style/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static  'style/css/color/lime.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static  'style/type/icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'style/my_custom.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+  <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="content-wrapper">
+  <!-- NAVBAR IN PARTIALS -->
+  {% block navbar %}
+  {% include "main/partials/navbar.html" %}
+  {% endblock %}
+
+      <!-- /.hero -->
+  {% block hero %}
+  {% include "main/partials/hero.html" %}
+  {% endblock %}
+    {% block menu %}
+  {% endblock %}
+  {% block content %}
+  {% endblock %}
+      <!-- /.cbp -->
+      
+      <div class="divide15"></div>
+    </div>
+    <!-- /.container-fluid --> 
+  </div>
+  <!-- /.light-wrapper --> 
+</div>
+<!-- /.content-wrapper -->
+{% block footer %}
+<footer class="dark-wrapper">
+  <div class="container inner2">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="widget">
+          <h3 class="widget-title section-title">Popular Posts</h3>
+
+          <ul class="post-list">
+            {% for x in popular_posts %}
+            <li>
+
+              <figure class="overlay small"> <a href="{{ x.get_absolute_url }}"><img src="{{ x.main_image.image.url }}" alt="" style="
+                              "/> </a> </figure>
+              <div class="post-content">
+
+                <h4 class="post-title"> <a href="{{ x.get_absolute_url }}">{{ x.title }}</a> </h4>
+                <div class="meta"><span class="date">{{ x.created }}</span></div>
+                  {% endfor %}
+              </div>
+            </li>
+
+
+          </ul>
+          <!-- /.post-list --> 
+        </div>
+        <!-- /.widget --> 
+      </div>
+      <!-- /column -->
+      
+      <div class="col-sm-3">
+        <div class="widget">
+          <h3 class="widget-title section-title">Recent Tags</h3>
+          <ul class="tag-list">
+            <li> <a href="#" class="btn">Blog</a> </li>
+            <li> <a href="#" class="btn">Photography</a> </li>
+            <li> <a href="#" class="btn">Illustation</a> </li>
+            <li> <a href="#" class="btn">Fun</a> </li>
+          </ul>
+        </div>
+        <!-- /.widget -->
+
+        <!-- /.widget --> 
+      </div>
+      <!-- /column -->
+      
+      <div class="col-sm-3">
+        <div class="widget">
+          <h3 class="widget-title section-title">Get in Touch</h3>
+          <address>
+          <strong>Robert Melen Photography</strong><br>
+          Swansea, Wales, UK <br>
+             <i>To get in touch just drop me an email at the address below</i>
+          <br>
+
+          <abbr title="Email">E:</abbr><strong> <a href="mailto:#">robert_melen@yahoo.co.uk</a></strong>
+          </address>
+        </div>
+        <!-- /.widget -->
+        <div class="widget">
+          <h3 class="widget-title section-title">Elsewhere</h3>
+          <ul class="social">
+
+            <li> <a href="#"><i class="ion-social-facebook"></i></a> </li>
+            <li> <a href="#"><i class="ion-social-twitter"></i></a> </li>
+            <li> <a href="#"><i class="ion-social-instagram"></i></a> </li>
+
+
+          </ul>
+        </div>
+        <!-- /.widget --> 
+        
+      </div>
+      <!-- /column -->
+      
+      <div class="col-sm-3">
+        <div class="widget">
+          <h3 class="widget-title section-title">About Me</h3>
+          <figure> <img src="{{ user.image.url }}" alt="" style="width:80px; height:80px;"/> </figure>
+          <div class="divide10"></div>
+          <p>{{ user.bio }}.</p>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /column --> 
+      
+    </div>
+    <!-- /.row --> 
+    
+  </div>
+  <!-- .container -->
+
+  <div class="sub-footer">
+    <div class="container inner">
+      <p class="text-center" style="font-size: 15px;">© 2022 Robert Melen. All rights reserved.</p>
+    </div>
+     {% endblock %}
+    <!-- .container --> 
+  </div>
+  <!-- .sub-footer -->
+
+  
+</footer>
+<!-- /footer -->
+
+<script type="text/javascript" src="{% static  'style/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/plugins.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/js/scripts.js' %}"></script>
+<script type="text/javascript" src="{% static  'style/custom.js' %}"></script>
+</body>
+</html>

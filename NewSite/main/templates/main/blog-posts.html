@@ -1,0 +1,115 @@
+{% extends "main/base.html" %}
+{% block hero %}
+{% endblock %}
+{% block content %}
+<div class="light-wrapper">
+    <div class="container inner tp60">
+      <div class="blog row">
+        <div class="col-sm-8">
+          <div class="blog-content classic-view">
+            <div class="blog-posts">
+<div class="container">
+{% if slug %}
+    <small>Posts filtered by the #{{ slug }} tag</small>
+{% elif blog_category  %}
+    <small>Posts filter by the #{{ blog_category }} category</small>
+    {% endif %}
+</div>
+
+
+{% for i in posts %}
+              <div class="post">
+                <div class="post-content">
+                  <h2 class="post-title text-center"><a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+                </h2>
+                    <div class="meta text-center"><span class="date">12 Nov 2014</span><span class="comments"><a href="#">Comments {{ i.comments.count }}</a></span><span class="category"><a href="{% url 'main:blog_list_by_category' i.blog_category %}">{{ i.blog_category }}</a></span></div>
+
+                 <figure class="overlay"><a href="blog-post.html"><img src="{{i.main_image.image.url}}" alt="" /></a></figure>
+                  <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus lacinia odio. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl et. Donec ullamcorper nulla non metus auctor fringilla. Nullam id dolor id nibh ultricies.</p>
+                  <p>Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus... </p>
+                  <div class="text-center"><a href="blog-post.html" class="more">Read More</a></div>
+                </div>
+                <!-- /.post-content -->
+              </div>
+              <hr>
+              {% endfor %}
+
+            </div>
+          </div>
+          <!-- /.classic-view -->
+           <div style="padding-top: 2px;">
+               {% include "main/partials/pagination.html" with page=posts %}</div>
+          <!-- /.pagination -->
+        </div>
+        <!-- /.blog-content -->
+{{ settings.blog_about_title }}
+        <aside class="col-sm-4 sidebar">
+          <div class="sidebox widget">
+              {% for x in settings %}
+            <h3 class="widget-title">{{ x.blog_about_title }}</h3>
+
+            <figure> <img src="{{ user.image.url }}" class="img-auto" style="width:200px;" alt="" /> </figure>
+            <div class="divide10"></div>
+            <p>{{ x.blog_message }}</p>{% endfor %}
+            <ul class="social">
+              <li> <a href="#"><i class="ion-social-rss"></i></a> </li>
+              <li> <a href="#"><i class="ion-social-facebook"></i></a> </li>
+              <li> <a href="#"><i class="ion-social-twitter"></i></a> </li>
+              <li> <a href="#"><i class="ion-social-instagram"></i></a> </li>
+              <li> <a href="#"><i class="ion-social-vimeo"></i></a> </li>
+              <li> <a href="#"><i class="ion-social-whatsapp"></i></a> </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <!-- /.widget -->
+
+
+          <!-- /.widget -->
+
+          <div class="sidebox widget">
+            <h3 class="widget-title">Categories</h3>
+            <ul class="list circled">
+
+                {% for x in categories %}
+              <li>
+                <a href="{% url 'main:blog_list_by_category' blog_category=x.slug %}">{{ x.title }} ({{ x.blogpost_set.all.count }})</a></li>
+                {% endfor %}
+
+
+            
+            </ul>
+          </div>
+          <!-- /.widget -->
+
+
+          <div class="sidebox widget">
+              <h3 class="widget-title">Tagssss</h3>
+              <ul class="list-group list-group-horizontal">
+{% for x in tags %}
+                  <a href="{% url 'main:blog_list_by_tag' x.slug %}" class="list-group-item btn btn-default">{{ x.slug }}</a> </li>
+                </ul>
+               {% endfor %}
+
+          </div>
+
+          <!-- /.widget -->
+          <div class="sidebox widget">
+            <h4 class="widget-title">Search</h4>
+            <form class="searchform" method="get">
+              <input type="text" id="s1" name="s" value="Search something" onfocus="this.value=''" onblur="this.value='Search something'">
+            </form>
+          </div>
+          <!-- /.widget -->
+        </aside>
+        <!-- /column .sidebar -->
+
+      </div>
+      <!-- /.blog -->
+
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.light-wrapper -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}
