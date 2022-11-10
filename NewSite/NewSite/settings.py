@@ -38,7 +38,7 @@ else:
     MAINTENANCE_MODE_TEMPLATE = "503.html"
 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
