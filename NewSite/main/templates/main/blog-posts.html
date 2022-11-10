@@ -83,7 +83,7 @@
 
 
           <div class="sidebox widget">
-              <h3 class="widget-title">Tagssss</h3>
+              <h3 class="widget-title">Tags</h3>
               <ul class="list-group list-group-horizontal">
 {% for x in tags %}
                   <a href="{% url 'main:blog_list_by_tag' x.slug %}" class="list-group-item btn btn-default">{{ x.slug }}</a> </li>

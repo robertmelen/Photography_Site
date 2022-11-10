@@ -20,7 +20,8 @@ def category_info(request):
 
 def tags_info(request):
   tags = Tag.objects.all()
-  return {'tags': tags}
+  footer_tags = Tag.objects.all()[:4]
+  return {'tags': tags, 'footer_tags': footer_tags}
 
 def general_settings(request):
   settings = Settings.objects.all()

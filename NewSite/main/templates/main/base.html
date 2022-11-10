@@ -82,10 +82,9 @@
         <div class="widget">
           <h3 class="widget-title section-title">Recent Tags</h3>
           <ul class="tag-list">
-            <li> <a href="#" class="btn">Blog</a> </li>
-            <li> <a href="#" class="btn">Photography</a> </li>
-            <li> <a href="#" class="btn">Illustation</a> </li>
-            <li> <a href="#" class="btn">Fun</a> </li>
+            {% for x in footer_tags %}
+            <li> <a href="{% url 'main:blog_list_by_tag' x.slug %}" class="btn">{{ x.slug }}</a> </li>
+            {% endfor %}
           </ul>
         </div>
         <!-- /.widget -->
