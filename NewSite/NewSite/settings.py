@@ -117,7 +117,10 @@ if live_deploy == True:
             'NAME': env("DATABASE_NAME"),
             'ENGINE': 'django.db.backends.postgresql',
             'USER': env('DATABASE_USER'),
-            'PASSWORD': env('DATABASE_PASSWORD'), }
+            'PASSWORD': env('DATABASE_PASSWORD'),
+            'HOST': env("DATABASE_HOST"),
+            'POST': env("DATABASE_PORT"),
+        }
     }
 
 
