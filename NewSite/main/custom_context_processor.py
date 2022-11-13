@@ -1,7 +1,9 @@
 from .models import Profile, Category, BlogPost, Post_Category, Tag, Settings
 from django.contrib.auth.decorators import user_passes_test
 
-
+def user_info(request):
+   current_user = Profile.objects.get(user='1')
+   return {'user': current_user }
 
 def post_info(request):
   popular_posts = BlogPost.objects.filter(status='published').order_by('-created')[0:3]
