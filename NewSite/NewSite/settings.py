@@ -119,7 +119,7 @@ if live_deploy == True:
             'USER': env('DATABASE_USER'),
             'PASSWORD': env('DATABASE_PASSWORD'),
             'HOST': env("DATABASE_HOST"),
-            'POST': env("DATABASE_PORT"),
+            'PORT': env("DATABASE_PORT"),
         }
     }
 
