@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-live_deploy = True
+
 DEBUG = True
 COMING_SOON = True
 if COMING_SOON:
@@ -35,7 +35,7 @@ else:
     MAINTENANCE_MODE_TEMPLATE = "503.html"
 
 
-ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -106,17 +106,11 @@ WSGI_APPLICATION = 'NewSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if live_deploy == False:
-    DATABASES = {
-        'default': {
-            'NAME': env("DEV_DATABASE_NAME"),
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': env('DEV_DATABASE_USER'),
-            'PASSWORD': env('DEV_DATABASE_PASSWORD'), }
-    }
+live_deploy = True
 
+if live_deploy == True:
 
-elif live_deploy == True:
+    ALLOWED_HOSTS = ['*']
 
     DATABASES = {
         'default': {
@@ -124,6 +118,19 @@ elif live_deploy == True:
             'ENGINE': 'django.db.backends.postgresql',
             'USER': env('DATABASE_USER'),
             'PASSWORD': env('DATABASE_PASSWORD'), }
+    }
+
+
+elif live_deploy == False:
+
+    ALLOWED_HOSTS = ['127.0.0.1', ]
+
+    DATABASES = {
+        'default': {
+            'NAME': env("DEV_DATABASE_NAME"),
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': env('DEV_DATABASE_USER'),
+            'PASSWORD': env('DEV_DATABASE_PASSWORD'), }
     }
 
 
