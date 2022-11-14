@@ -112,6 +112,8 @@ if live_deploy == True:
 
     ALLOWED_HOSTS = ['*', 'https://photographysite-production.up.railway.app']
 
+    CSRF_TRUSTED_ORIGINS = ['https://photographysite-production.up.railway.app']
+
     DATABASES = {
         'default': {
             'NAME': env("DATABASE_NAME"),
