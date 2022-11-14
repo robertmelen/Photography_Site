@@ -2,7 +2,7 @@ from .models import Profile, Category, BlogPost, Post_Category, Tag, Settings
 from django.contrib.auth.decorators import user_passes_test
 
 def user_info(request):
-   current_user = Profile.objects.get(user='1')
+   current_user = Profile.objects.get(user='rob')
    return {'user': current_user }
 
 def post_info(request):
