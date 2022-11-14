@@ -110,7 +110,7 @@ live_deploy = True
 
 if live_deploy == True:
 
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['*', 'https://photographysite-production.up.railway.app']
 
     DATABASES = {
         'default': {
