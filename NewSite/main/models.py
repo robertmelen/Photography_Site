@@ -169,6 +169,8 @@ class Settings(models.Model):
     main_hero_text = models.CharField(max_length=300, null=True, blank=True)
     blog_about_title= models.CharField(max_length=200, null=True, blank=True)
     blog_message = models.CharField(max_length=500, null=True, blank=True)
+    profile_bio = models.TextField(max_length=1500, null=True, blank=True)
+    profile_image = models.ImageField(upload_to="profile_pics", default="profile")
 
     def __str__(self):
         return ("Settings for site")

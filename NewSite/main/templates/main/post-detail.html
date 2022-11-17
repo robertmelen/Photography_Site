@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load markdownify %}
 {% block hero %}
 {% endblock %}
 {% block content %}
@@ -69,7 +70,7 @@
                               <h5><a href="#">{{ i.name }}</a></h5>
                               <div class="meta"> <span class="date">{{ i.created }}</span><span class="reply"><a class="link-effect" href="#">Reply</a></span> </div>
                             </div>
-                            <p>{{ i.body|linebreaks }}</p>
+                            <p>{{ i.body|markdownify }}</p>
                              {% endfor %}
                           </div>
                         </div>

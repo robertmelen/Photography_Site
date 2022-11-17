@@ -125,9 +125,12 @@
       <div class="col-sm-3">
         <div class="widget">
           <h3 class="widget-title section-title">About Me</h3>
-          <figure> <img src="{{ user.image.url }}" alt="" style="width:80px; height:80px;"/> </figure>
+          {% for x in settings %}
+          <figure> <img src="{{ x.profile_image.url }}" alt="" style="width:80px; height:80px;"/> </figure>
+
           <div class="divide10"></div>
-          <p>{{ user.bio }}.</p>
+          <p>{{ x.profile_bio }}.</p>
+          {% endfor %}
         </div>
         <!-- /.widget -->
       </div>

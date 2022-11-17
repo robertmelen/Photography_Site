@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load markdownify %}
 {% block hero %}
 {% endblock %}
 {% block content %}
@@ -24,10 +25,10 @@
                 </h2>
                     <div class="meta text-center"><span class="date">12 Nov 2014</span><span class="comments"><a href="#">Comments {{ i.comments.count }}</a></span><span class="category"><a href="{% url 'main:blog_list_by_category' i.blog_category %}">{{ i.blog_category }}</a></span></div>
 
-                 <figure class="overlay"><a href="blog-post.html"><img src="{{i.main_image.image.url}}" alt="" /></a></figure>
-                  <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus lacinia odio. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl et. Donec ullamcorper nulla non metus auctor fringilla. Nullam id dolor id nibh ultricies.</p>
-                  <p>Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus... </p>
-                  <div class="text-center"><a href="blog-post.html" class="more">Read More</a></div>
+                 <figure class="overlay"><a href="{{ i.get_absolute_url }}"><img src="{{i.main_image.image.url}}" alt="" /></a></figure>
+                  <p>{{ i.body|markdownify|truncatewords:120}}</p>
+                  <p> </p>
+                  <div class="text-center"><a href="{{ i.get_absolute_url }}" class="more">Read More</a></div>
                 </div>
                 <!-- /.post-content -->
               </div>
@@ -48,7 +49,7 @@
               {% for x in settings %}
             <h3 class="widget-title">{{ x.blog_about_title }}</h3>
 
-            <figure> <img src="{{ user.image.url }}" class="img-auto" style="width:200px;" alt="" /> </figure>
+            <figure> <img src="{{ x.profile_image.url }}" class="img-auto" style="width:200px;" alt="" /> </figure>
             <div class="divide10"></div>
             <p>{{ x.blog_message }}</p>{% endfor %}
             <ul class="social">

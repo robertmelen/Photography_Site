@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'imagekit',
     'storages',
     'django_summernote',
+    'markdownify.apps.MarkdownifyConfig',
 
 
 ]
