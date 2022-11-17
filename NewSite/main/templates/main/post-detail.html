@@ -70,7 +70,8 @@
                               <h5><a href="#">{{ i.name }}</a></h5>
                               <div class="meta"> <span class="date">{{ i.created }}</span><span class="reply"><a class="link-effect" href="#">Reply</a></span> </div>
                             </div>
-                            <p>{{ i.body|markdownify }}</p>
+                            <div class="container">
+                            {{ i.body|markdownify }}</div>
                              {% endfor %}
                           </div>
                         </div>
