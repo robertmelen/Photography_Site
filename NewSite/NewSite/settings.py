@@ -27,7 +27,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 COMING_SOON = True
 if COMING_SOON:
     MAINTENANCE_MODE_TEMPLATE = "coming_soon.html"
@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'NewSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-live_deploy = True
+live_deploy = False
 
 if live_deploy == True:
 

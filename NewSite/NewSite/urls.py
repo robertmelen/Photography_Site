@@ -29,7 +29,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin9373/', admin.site.urls),
     path('', include('main.urls', namespace="main")),
     re_path(r'^maintenance-mode/', include('maintenance_mode.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
