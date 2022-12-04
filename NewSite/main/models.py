@@ -69,8 +69,7 @@ class Media(models.Model):
     image = models.ImageField(upload_to="media")
     thumbnail = ImageSpecField([Adjust(sharpness=1.1), ResizeToFill(800, 650)],
                                source='image', format='JPEG', options={'quality': 100})
-    gallery_image = ImageSpecField([ResizeToFill(1200, 850)],
-                               source='image', format='JPEG', options={'quality': 80})
+
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     front_page = models.BooleanField(default=False)

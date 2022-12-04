@@ -22,7 +22,7 @@
 
               {% for img in pics %}
               <ul class="basic-gallery text-center">
-                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.gallery_image.url }}" alt="" style="padding-top: 20px;"/></li>
+                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}" alt="" style="padding-top: 20px;"/></li>
              </ul>
             <div #id="caption" class="container">
             {% if img.meta != None %}
