@@ -13,9 +13,10 @@
   {% for img in posts %}
       <div style="float:left; width:250px; height:250px; padding:10px; ">
           <a href="{% url 'main:gallery-detail' img.slug %}">
-              <img src="{{ img.image.thumbnail.url }}" class="img-thumbnail"  alt=""></a>
+              <img src="{{ img.image.thumbnail.url }}" class="img-thumbnail" alt=""></a>
               <div style="padding: 5px;"><h6>{{ img.name }}: <small>{{ img.album_images.count }} images</small>
-              </h6><small>{{ img.description }}</small> </div>
+              </div>
+               <div><small>{{ img.description }}</small> </div>
       </div>
     {% endfor%}
 </div>
