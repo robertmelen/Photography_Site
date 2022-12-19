@@ -3,13 +3,20 @@ from django_summernote.admin import SummernoteModelAdmin
 from . models import Media, Category, Albums, Profile, BlogPost, Post_Category, Comment, Tag, \
     Settings
 
+import admin_thumbnails
+
 
 class BlogPostModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
     summernote_fields = '__all__'
 
 admin.site.register(BlogPost, BlogPostModelAdmin)
 
-admin.site.register(Media)
+@admin.register(Media)
+@admin_thumbnails.thumbnail('image')
+class MediaAdmin(admin.ModelAdmin):
+    list_display  = ('thumbnail', 'visable','image_thumbnail',)
+
+
 admin.site.register(Category)
 admin.site.register(Albums)
 admin.site.register(Profile)
@@ -21,7 +28,5 @@ admin.site.register(Settings)
 
 
 
-#@admin.register(Media)
-#class MediaAdmin(admin.ModelAdmin):
-    #list_display  = ('image', 'categories', 'order',)
+
 
