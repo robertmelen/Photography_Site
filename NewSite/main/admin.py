@@ -14,7 +14,7 @@ admin.site.register(BlogPost, BlogPostModelAdmin)
 @admin.register(Media)
 @admin_thumbnails.thumbnail('image')
 class MediaAdmin(admin.ModelAdmin):
-    list_display  = ('thumbnail', 'visable','image_thumbnail',)
+    list_display  = ('thumbnail', 'visable', 'front_page', 'categories', 'image_thumbnail',)
 
 
 admin.site.register(Category)
