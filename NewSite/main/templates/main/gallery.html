@@ -9,21 +9,22 @@
     <p>Here, you can find a selection of galleries, click on a thumbnail to see the images</p></div>
     {% include "main/partials/pagination.html" with page=posts %}
 
-<div style="width:120%">
-  {% for img in posts %}
-      <div style="float:left; width:250px; height:250px; padding:10px; ">
-          <a href="{% url 'main:gallery-detail' img.slug %}">
+    {% block footer %}
+{% endblock %}
+<div class="container">
+    <div class="row">
+
+{% for img in posts %}
+        <div class="col-sm-4 col-md-4 col-lg-3">
+             <a href="{% url 'main:gallery-detail' img.slug %}">
               <img src="{{ img.image.thumbnail.url }}" class="img-thumbnail" alt=""></a>
-          <div style="padding: 5px;"><h6>{{ img.name }}:</h6> <small>{{ img.album_images.count }} images / </small>
+             <div style="padding: 5px;"><h6>{{ img.name }}:</h6> <small>{{ img.album_images.count }} images / </small>
 
                <small>{{ img.description }}</small> </div>
-      </div>
-    {% endfor%}
+        </div>
+{% endfor %}
+    </div>
 </div>
-
-</div>
-{% block footer %}
-{% endblock %}
 
 <footer class="bg-light text-center text-lg-start robs-footer">
   <!-- Copyright -->
