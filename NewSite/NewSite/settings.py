@@ -129,7 +129,7 @@ if live_deploy == True:
 
 elif live_deploy == False:
 
-    ALLOWED_HOSTS = ['127.0.0.1', ]
+    ALLOWED_HOSTS = ['127.0.0.1', 'https://*.robmelenphotography.co.uk' ]
 
     DATABASES = {
         'default': {
@@ -226,4 +226,6 @@ SUMMERNOTE_CONFIG = {
 }
 
 SUMMERNOTE_THEME = 'bs3'
+
+CSRF_TRUSTED_ORIGINS = ['https://*.robmelenphotography.co.uk','https://*.127.0.0.1']
 
