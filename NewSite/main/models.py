@@ -128,7 +128,7 @@ class BlogPost(models.Model):
     tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
     slug = models.SlugField(unique_for_date='publish')
     body = models.TextField()
-    main_image = models.ForeignKey(Media, on_delete=models.CASCADE, null=True)
+    main_image = models.ForeignKey(Media, on_delete=models.SET_NULL, null=True)
     post_images = models.ManyToManyField(Media, blank=True, related_name="Blog_images")
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)

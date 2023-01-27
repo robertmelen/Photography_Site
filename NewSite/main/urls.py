@@ -17,6 +17,7 @@ urlpatterns = [
     path("blog-posts/", views.BlogList, name="blog-posts"),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
     path("category/<int:pk>", views.category_detail, name='category_detail'),
-    path("tags/<int:tag_id>", views.list_posts_by_tag, name="tag")
+    path("tags/<int:tag_id>", views.list_posts_by_tag, name="tag"),
+
 
 ]

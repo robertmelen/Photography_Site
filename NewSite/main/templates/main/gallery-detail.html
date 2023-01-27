@@ -21,9 +21,12 @@
     <h2 class="post-title text-center">{{ img.name }}</h2>
 
               {% for img in pics %}
+
               <ul class="basic-gallery text-center">
-                  <li><img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}" alt="" style="padding-top: 20px;"/></li>
-             </ul>
+
+                  <li>
+                      <img class="gallery-images-detail" src="{{ MEDIA_URL }} {{ img.image.url }}"/></li>
+              </ul>
             <div #id="caption" class="container">
             {% if img.meta != None %}
             {{ img.meta }}

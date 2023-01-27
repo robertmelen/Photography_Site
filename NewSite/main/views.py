@@ -165,6 +165,12 @@ def list_posts_by_tag(request, tag_id):
 
 
 
+
+
+
+
+
+
   # if request.htmx:
   #       try:
   #           slug = request.GET.get('slug')
