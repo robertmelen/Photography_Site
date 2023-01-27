@@ -54,7 +54,7 @@ class Albums(models.Model):
     created = models.DateTimeField()
     visable = models.BooleanField(default=False)
     type = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ForeignKey('Media', on_delete=models.CASCADE)
+    image = models.ForeignKey('Media', on_delete=models.SET_NULL, null=True)
     album_images = models.ManyToManyField('Media', related_name="album_pictures")
 
     def __str__(self):
@@ -73,7 +73,7 @@ class Media(models.Model):
     order = models.IntegerField(default=0)
     visable = models.BooleanField(default=True)
     front_page = models.BooleanField(default=False)
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     meta = models.TextField(max_length=2000, null=True, blank=True, editable=True)
 
 
