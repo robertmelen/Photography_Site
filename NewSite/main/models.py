@@ -24,6 +24,7 @@ class Category(models.Model):
     title = models.CharField(max_length=200, null=True)
     visable = models.BooleanField(default=False, help_text="Make visable to appear on gallery category menu")
     slug = AutoSlugField(populate_from='title')
+    description = models.CharField(max_length=200, null=True)
 
 
     class Meta:

@@ -1,13 +1,20 @@
 {% load static %}
 {% load imagekit %}
+
+{{ category }} images / {{ category.description }}
 <div class="cbp-inline">
-  <div class="swiper-container-wrapper image-carousel-wrapper">
-      <div class="swiper-container image-carousel">
+    <div class="swiper-container-wrapper image-carousel-wrapper">
+        <div class="swiper-container image-carousel">
+
+
+
         <div class="swiper-wrapper">
+
             {% for image in object_list %}
-          <div class="swiper-slide"><img src="{{ image.thumbnail.url }}" alt="" /></div>
-          {% endfor %}
+            <div class="swiper-slide"><img src="{{ image.thumbnail.url }}" alt="" /></div>
+            {% endfor %}
         </div>
+
       </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-next btn"></div>
