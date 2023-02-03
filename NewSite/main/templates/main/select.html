@@ -1,7 +1,7 @@
 {% load static %}
 {% load imagekit %}
 
-
+<p class="text-centre">{{ category }} images / </p>
 <div class="cbp-inline">
     <div class="swiper-container-wrapper image-carousel-wrapper">
         <div class="swiper-container image-carousel">
@@ -19,7 +19,7 @@
       <div class="swiper-pagination"></div>
       <div class="swiper-button-next btn"></div>
       <div class="swiper-button-prev btn"></div>
-        <p class="text-centre">{{ category }} images / {{ category.description }}</p>
+        <p class="text-centre">{{ category.description }}</p>
     </div>
 
 </div>
